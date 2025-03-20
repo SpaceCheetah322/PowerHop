@@ -60,7 +60,7 @@ while play:
     play = False
 
 """
-import time
+import time #Timer/Stopwatch?
 play = True #Controls if app is running
 game = False #Controls if game is running
 
