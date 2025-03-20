@@ -1,6 +1,14 @@
-play = True # Controls if program is running
-game = False # Controls if game is running
-while play = True:
-  print("Welcome to <INSERT NAME HERE>")
-  
-  play = False
+play = True #Controls if game is running
+
+print("Welcome to <INSERT NAME HERE> !")
+  # if (mouse_click):
+  #   play = True #Game start
+
+  # INSTRUCTION SCREEN
+  # GAME LOGIC
+  #   play = False #Shuts off gameplay
+
+  # if (replay_Pressed = True):
+  #   game = True
+  # elif (quit_Pressed = True):
+  #   pass #End program
