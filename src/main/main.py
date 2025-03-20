@@ -52,8 +52,41 @@ def startGame():
     pygame.quit()
 
 """
+
 # Main loop
 play = True
 while play:
     print("Welcome to PowerHop")
     play = False
+
+"""
+import time
+play = True #Controls if app is running
+game = False #Controls if game is running
+
+print("Welcome to <INSERT NAME HERE> !") #Intro Message
+# if (mouse_click)
+#   CLEAR SCREEN
+#   game = True #Game start
+
+print ("Arrow Keys or WASD to move.") #Instructions
+print ("Avoid cars, don't fall into the water.")
+print ("Collect flies and powerups for benefits.")
+print ("Reach the end before the timer runs out and without expending all your lives.")
+print ("Enjoy!")
+time.sleep(5)
+# CLEAR SCREEN
+
+if (game = True and play = True):
+    # GAME LOGIC
+    game = False #Shuts off gameplay
+
+print ("Game Over") #End Screen
+print ("Score: " + score)
+
+if (replay_Pressed = True):
+  game = True #Rerun
+elif (quit_Pressed = True):
+  play = False #End Program
+
+"""
