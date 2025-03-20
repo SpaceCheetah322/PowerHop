@@ -2,4 +2,4 @@
 A OOP Frogger like program with added powerups and modes
 
 ## Class Diagram
-![Class Diagraom] (https://github.com/SpaceCheetah322/Frogger/blob/main/images/Updated_Class_Diagram.png?raw=true)
+![Class Diagram](https://github.com/SpaceCheetah322/Frogger/blob/main/images/Updated_Class_Diagram.png?raw=true)
