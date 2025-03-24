@@ -15,8 +15,6 @@ screen_width, screen_height = 800, 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Frogger Game")
 
-player = Player(x=100, y=100, speed=5, lives=3, image_path="player.png")   #Player initialization
-
 # Game start function
 def startGame():
     # Initialize objects
