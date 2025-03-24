@@ -7,7 +7,7 @@ class Fly:
         self.x = 0
         self.y = 0
         self.isCollected = False
-        self.image = image_path  # Placeholder for the image
+        self.image = image_path  # Placeholder for the image. Not exactly sure how to do this yet but the image is ready in the folder.
 
     def spawn(self):
         pass  # Logic for spawning the fly
@@ -17,7 +17,7 @@ class Fly:
         x += random.randint(0,15)
         x += random.randint(0,15)
 
-    def checkCol(self, player):
+    def checkCol(self, player): # Not at ALL sure if this works or not.
         # player_loc = [player.x, player.y]
         # loc = [x, y]
         # distance = math.dist(player_loc, loc)
