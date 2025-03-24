@@ -1,3 +1,4 @@
+import math
 class Fly:
     def __init__(self, image_path):
         self.x = 0
@@ -9,4 +10,9 @@ class Fly:
         pass  # Logic for spawning the fly
 
     def checkCol(self, player):
+        # player_loc = [player.x, player.y]
+        # loc = [x, y]
+        # distance = math.dist(player_loc, loc)
+        # if (distance <= 5):
+        #     player.point += 5
         pass  # Logic for checking collision with the player
