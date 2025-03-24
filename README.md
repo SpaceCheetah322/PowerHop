@@ -7,11 +7,11 @@ A OOP program inspired by Frogger, with added powerups and modes. The user will 
 * Sofia - car and log class
 * Katelyn - fly and powerup class
 
-## GUI mockups (created by Katelyn, added by Ava)
+## GUI mockups (created by Katelyn and Sofia, added by Ava)
 ![Start screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Start.png?raw=true)
 ![Play Screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Play.png?raw=true)
 ![End Screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_End.png?raw=true)
-![Car](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/New%20Piskel.png?raw=true)
+![Car](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/Screenshot:car.png?raw=true)
 
 ## Class Diagram (1st draft by Kai, updated draft by Ava)
 ![Class Diagram](https://github.com/SpaceCheetah322/Frogger/blob/main/images/Updated_Class_Diagram.png?raw=true)
