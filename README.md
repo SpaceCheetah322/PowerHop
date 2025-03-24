@@ -2,10 +2,10 @@
 A OOP program inspired by Frogger, with added powerups and modes. The user will try to get a frog across the screen while avoiding obstacles (eg: crossing a road while dodging cars, using logs to cross a river). They will be able to collect powerups, in the form of bugs scattered around the level, which will give them special abilities such as shields or longer jump distance.
 
 # Roles
-* Ava -
-* Kai -
-* Sofia -
-* Katelyn -
+* Ava - main class
+* Kai - player class
+* Sofia - car and log class
+* Katelyn - fly and powerup class
 
 ## GUI mockups (created by Katelyn, added by Ava)
 ![Start screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Start.png?raw=true)
