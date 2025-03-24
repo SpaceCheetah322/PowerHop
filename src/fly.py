@@ -14,5 +14,5 @@ class Fly:
         # loc = [x, y]
         # distance = math.dist(player_loc, loc)
         # if (distance <= 5):
-        #     player.point += 5
+        #     main.points += 5
         pass  # Logic for checking collision with the player
