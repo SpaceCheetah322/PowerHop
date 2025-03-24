@@ -1,4 +1,4 @@
-class Pow:
+class Powerup:
     def __init__(self, x, y, effect, image_path):
         self.x = x
         self.y = y
