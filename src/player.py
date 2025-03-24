@@ -2,7 +2,7 @@ class Player:
     def __init__(self, x, y, speed, lives, image_path):
         self.x = x
         self.y = y
-        self.speed = speed
+        self.speed = 20   # May Break
         self.lives = lives
         self.image = image_path  # Placeholder for the image
 
