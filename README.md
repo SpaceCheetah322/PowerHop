@@ -1,5 +1,5 @@
 # PowerHop
-A OOP Frogger like program with added powerups and modes
+A OOP program inspired by Frogger, with added powerups and modes
 
 # Roles
 * Ava -
