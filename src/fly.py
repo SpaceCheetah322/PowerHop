@@ -2,6 +2,8 @@ import math
 import time
 import random
 
+# MOVEMENT IS WIP!
+
 class Fly:
     def __init__(self, image_path):
         self.x = 0
@@ -14,6 +16,7 @@ class Fly:
         pass  # Logic for spawning the fly
 
     def move(x, y):
+        # Fly will rest for 7 seconds, then move to a random location on screen.
         time.sleep(7)
         x += (random.randint(-15,15)) * direction
         y += (random.randint(-15,15)) * direction
