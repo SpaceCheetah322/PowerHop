@@ -6,6 +6,7 @@ class Fly:
     def __init__(self, image_path):
         self.x = 0
         self.y = 0
+        self.direction = 1
         self.isCollected = False
         self.image = image_path  # Placeholder for the image. Not exactly sure how to do this yet but the image is ready in the folder.
 
@@ -14,8 +15,8 @@ class Fly:
 
     def move(x, y):
         time.sleep(7)
-        x += random.randint(0,15)
-        x += random.randint(0,15)
+        x += (random.randint(-15,15)) * direction
+        y += (random.randint(-15,15)) * direction
 
     def checkCol(self, player): # Not at ALL sure if this works or not.
         # player_loc = [player.x, player.y]
