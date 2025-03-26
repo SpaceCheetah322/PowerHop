@@ -1,3 +1,5 @@
+#Ava
+
 """
 import pygame
 
@@ -52,12 +54,27 @@ def startGame():
     pygame.quit()
 
 """
+#how to create window
 
-# Main loop
-play = True
-while play:
-    print("Welcome to PowerHop")
-    play = False
+
+
+#make text
+
+
+
+
+
+img = None
+
+def setup():
+    global img
+    img = loadImage("hopLogo.JPEG") 
+    size(800, 600) 
+
+def draw():
+    background(255)
+    image(img, 90,80, img.width*3, img.height*3)
+    
 
 """
 import time #Timer/Stopwatch?
