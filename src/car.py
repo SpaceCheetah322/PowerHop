@@ -11,16 +11,14 @@ class Car:
 
     def checkCol(self, obj):
         pass  # Logic for checking collision with another object
+
 img = None
 
 def setup():
-    # Load the PNG image from the data folder
     global img
-    img = loadImage("Car Piskel (1).png")  # Make sure the file is in the data folder
-    size(800, 600)  # Set the size of the window
+    img = loadImage("Car.png") 
+    size(800, 600) 
 
 def draw():
-    # Clear the screen with a white background
     background(255)
-
-    image(img, 200, 200)
+    image(img, 90,80, img.width*3, img.height*3)
