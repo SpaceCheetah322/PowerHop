@@ -68,11 +68,18 @@ def setup():
     global img
     img = loadImage("logo.png") 
     size(800, 600) 
+    global f
+    f = createFont("Arial",30)
+    textFont(f,30)
+    textAlign(CENTER)
+    
     
 
 def draw():
     background(255)
-    image(img, 90,80, img.width*3, img.height*3)
+    image(img, 250,300, img.width*9, img.height*9)
+    fill(0)
+    text("Welcome to PowerHop",400,200)
     
 
 """
