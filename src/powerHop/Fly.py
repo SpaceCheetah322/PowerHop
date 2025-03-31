@@ -1,8 +1,7 @@
-import math
 import time
 import random
 
-# MOVEMENT IS WIP!
+# WIP
 
 class Fly:
     def __init__(self, image_path):
@@ -12,10 +11,14 @@ class Fly:
         y_speed = random.randint(1, 3)
         x_loc = random.randint(0, 500)
         y_loc = random.randint(0, 500)
-        self.isCollected = False
-        self.image = image_path  # Placeholder for the image. Not exactly sure how to do this yet but the image is ready in the folder.
+        # frame_1 = loadImage("Frogger_Fly_Frame1.gif")
+        # frame_2 = loadImage("Frogger_Fly_Frame2.gif")
+        # frame_3 = loadImage("Frogger_Fly_Frame3.gif")
+        # frame_4 = loadImage("Frogger_Fly_Frame2.gif")
+        # self.image = image_path  # Placeholder for the image. Not exactly sure how to do this yet but the image is ready in the folder.
 
     def spawn(self):
+        # image(frame_1, x, y)
         pass  # Logic for spawning the fly
 
     def move(x, y):
@@ -33,6 +36,9 @@ class Fly:
             x_loc = random.randint(0, 500)
             y_loc = random.randint(0, 500)
             time.sleep(3)
+        # image(frame_1, x, y)
+        x_loc = random.randint(0, 500)
+        y_loc = random.randint(0, 500)
 
     def checkCol(self, player): # Not at ALL sure if this works or not.
         # player_loc = [player.x, player.y]
