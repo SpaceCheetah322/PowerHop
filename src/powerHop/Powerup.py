@@ -26,3 +26,6 @@ class Powerup:
             image(double_points, self.x, self.y)
         elif self.type == 'c': 
             image(health_bonus, self.x, self.y)
+
+    def collision(self):
+        pass # For now!
