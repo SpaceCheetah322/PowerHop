@@ -25,7 +25,7 @@ class Car:
             return True
         return False
 crr = None
-
+''' THIS CODE GOES INTO MAIN:
 def setup():
 
     global crr
@@ -36,3 +36,4 @@ def draw():
 
     background(255)
     image(crr, 200, 200, img.width*4, img.height*4)
+'''
