@@ -1,6 +1,11 @@
 img = None
 f = None
 play = False  # Added as global
+global crr
+crr = loadImage("Car.png")  
+
+
+
 
 def setup():
     global img, f
@@ -14,6 +19,7 @@ def setup():
 def draw():
     if play:
         background(255)
+        image(crr, 200, 200, img.width*4, img.height*4)
     else:  
         background(120, 170, 255)
         image(img, 250, 300, img.width*9, img.height*9)
