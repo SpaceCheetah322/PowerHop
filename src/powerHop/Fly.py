@@ -5,7 +5,6 @@ import random
 class Fly:
     # Constructor
     def __init__(self):
-        print("Entered Class")
         self.x = 250
         self.y = 250
         self.x_speed = random.randint(1, 3)
@@ -16,15 +15,12 @@ class Fly:
         self.frame_2 = loadImage("Frogger_Fly_Frame2.gif")
         self.frame_3 = loadImage("Frogger_Fly_Frame3.gif")
         self.frame_4 = loadImage("Frogger_Fly_Frame2.gif")
-        print("Initiation complete")
 
     # Methods
-    def display(self):
+    def display(self): # Displays fly; might house GIF frames someday
         image(self.frame_1, self.x, self.y)
-        print("Displayed")
 
-    def move(self):
-        print("Move classs entered")
+    def move(self): # Moves fly towards random location. If location reached, wait a couple seconds and choose a new target.
         if (self.x < self.x_loc):
             self.x += self.x_speed
         elif (self.x > self.x_loc):
@@ -37,9 +33,6 @@ class Fly:
             self.x_loc = random.randint(0, 500)
             self.y_loc = random.randint(0, 500)
             time.sleep(2)
-        print("Direction determined")
         self.display()
-        print("Moved")
         self.x_speed = random.randint(1, 3)
         self.y_speed = random.randint(1, 3)
-        print("Speed adjusted")
