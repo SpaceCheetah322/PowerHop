@@ -1,52 +1,45 @@
+# NOTE: Movement semi-works, GIF work-in-progress
 import time
 import random
 
-# WIP
-
 class Fly:
-    def __init__(self, image_path):
-        self.x = 0
-        self.y = 0
-        x_speed = random.randint(1, 3)
-        y_speed = random.randint(1, 3)
-        x_loc = random.randint(0, 500)
-        y_loc = random.randint(0, 500)
-        # frame_1 = loadImage("Frogger_Fly_Frame1.gif")
-        # frame_2 = loadImage("Frogger_Fly_Frame2.gif")
-        # frame_3 = loadImage("Frogger_Fly_Frame3.gif")
-        # frame_4 = loadImage("Frogger_Fly_Frame2.gif")
-        # self.image = image_path  # Placeholder for the image. Not exactly sure how to do this yet but the image is ready in the folder.
+    # Constructor
+    def __init__(self):
+        print("Entered Class")
+        self.x = 250
+        self.y = 250
+        self.x_speed = random.randint(1, 3)
+        self.y_speed = random.randint(1, 3)
+        self.x_loc = random.randint(0, 500)
+        self.y_loc = random.randint(0, 500)
+        self.frame_1 = loadImage("Frogger_Fly_Frame1.gif")
+        self.frame_2 = loadImage("Frogger_Fly_Frame2.gif")
+        self.frame_3 = loadImage("Frogger_Fly_Frame3.gif")
+        self.frame_4 = loadImage("Frogger_Fly_Frame2.gif")
+        print("Initiation complete")
 
-    def spawn(self):
-        # image(frame_1, x, y)
-        pass  # Logic for spawning the fly
+    # Methods
+    def display(self):
+        image(self.frame_1, self.x, self.y)
+        print("Displayed")
 
-    def move(x, y):
-        # Fly will rest for 3 seconds, then move to a random location on screen.
-        while (x != x_loc or y != y_loc):
-                if (x < x_loc):
-                    x += x_speed
-                elif (x > x_loc):
-                    x -= x_speed
-                if (y < y_loc):
-                    y += y_speed
-                elif (y > y_loc):
-                    y -= y_speed
-        if (x == x_loc and y == y_loc):
-            x_loc = random.randint(0, 500)
-            y_loc = random.randint(0, 500)
-            time.sleep(3)
-        # image(frame_1, x, y)
-        x_loc = random.randint(0, 500)
-        y_loc = random.randint(0, 500)
-
-    def checkCol(self, player): # Not at ALL sure if this works or not.
-        # player_loc = [player.x, player.y]
-        # loc = [x, y]
-        # distance = math.dist(player_loc, loc)
-        # if (distance <= 5):
-        #     main.points += 5
-        #     isCollected = True
-        #     DELETE FLY
-        pass  # Logic for checking collision with the player
-        
+    def move(self):
+        print("Move classs entered")
+        if (self.x < self.x_loc):
+            self.x += self.x_speed
+        elif (self.x > self.x_loc):
+            self.x -= self.x_speed
+        if (self.y < self.y_loc):
+            self.y += self.y_speed
+        elif (self.y > self.y_loc):
+            self.y -= self.y_speed
+        if (self.x == self.x_loc and self.y == self.y_loc):
+            self.x_loc = random.randint(0, 500)
+            self.y_loc = random.randint(0, 500)
+            time.sleep(2)
+        print("Direction determined")
+        self.display()
+        print("Moved")
+        self.x_speed = random.randint(1, 3)
+        self.y_speed = random.randint(1, 3)
+        print("Speed adjusted")
