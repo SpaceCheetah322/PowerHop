@@ -24,16 +24,15 @@ class Car:
         if frog.x < self.x + self.width and frog.x + frog.width > self.x and frog.y < self.y + self.height and frog.y + frog.height > self.y:
             return True
         return False
-img = None
+crr = None
 
 def setup():
 
-    global img
-    img = loadImage("Car Piskel (1).png")  # Make sure the file is in the data folder
-    size(800, 600)  # Set the size of the window
+    global crr
+    crr = loadImage("Car.png")  
+    size(800, 600)  
 
 def draw():
 
     background(255)
-
-    image(img, 200, 200)
+    image(crr, 200, 200, img.width*4, img.height*4)
