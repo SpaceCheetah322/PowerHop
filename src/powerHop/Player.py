@@ -2,20 +2,19 @@ class Player:
     def __init__(self, x, y, speed, lives, image_path):
         self.x = x
         self.y = y
-        self.speed = 20   # May Break
+        self.speed = 20   #needs fine tuning
         self.lives = lives
-        self.image = image_path  # Placeholder for the image
+        self.image = image_path
 
-    def move(self):
-        # Movement logic using pygame
-        if keys[pygame.K_LEFT]:  # Left arrow key or 'A'
-            self.x -= self.speed
-        if keys[pygame.K_RIGHT]:  # Right arrow key or 'D'
-            self.x += self.speed
-        if keys[pygame.K_UP]:  # Up arrow key or 'W'
-            self.y -= self.speed
-        if keys[pygame.K_DOWN]:  # Down arrow key or 'S'
-            self.y += self.speed
+    def move(self, keys):
+    if keys[pygame.K_LEFT]:
+        self.x -= self.speed
+    if keys[pygame.K_RIGHT]:
+        self.x += self.speed
+    if keys[pygame.K_UP]:
+        self.y -= self.speed
+    if keys[pygame.K_DOWN]:
+        self.y += self.speed
 
     def checkCol(self, obj):
-        pass  # Logic for checking collision with another object
+        pass
