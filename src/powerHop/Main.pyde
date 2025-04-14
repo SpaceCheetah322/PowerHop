@@ -69,7 +69,8 @@ def playScreen():
 
     # Draw the car
     car.display()  # Or car.show(), depending on your Car class
-'''''''
+
+'''
 from Car import Car
 img = None
 f = None
