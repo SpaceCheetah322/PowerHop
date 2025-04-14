@@ -24,5 +24,5 @@ class Car:
             return True
         return False
     def display():
-        background(255)
+       # background(255)
         image(crr, 200, 200, img.width*4, img.height*4)
