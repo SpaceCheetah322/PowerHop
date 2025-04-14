@@ -69,7 +69,7 @@ def playScreen():
 
     # Draw the car
     car.display()  # Or car.show(), depending on your Car class
-''''
+'''''''
 from Car import Car
 img = None
 f = None
@@ -134,4 +134,5 @@ def draw():
 
 def keyPressed():
     global play
-    play = True  """"
+    play = True  """
+'''
