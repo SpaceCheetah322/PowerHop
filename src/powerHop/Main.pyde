@@ -101,7 +101,7 @@ def keyPressed():
     global play
     play = False
 
-'"from Car import Car
+from Car import Car
 
 img = None
 f = None
