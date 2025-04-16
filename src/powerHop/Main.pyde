@@ -3,8 +3,8 @@
 img = None
 f = None
 play = False  # Added as global
-#car_img = None
-#car = None
+car_img = None
+
 
 def setup():
     global img, car_img, f, car
@@ -15,7 +15,7 @@ def setup():
     textFont(f, 30)
     textAlign(CENTER)
 # Instantiate your existing Car class (adjust this as per your actual class)
-    #car = Car(width // 2 - 30, height * 0.82, car_img)  # Assuming Car takes x, y, and image
+    car = Car(width // 2 - 30, height * 0.82, car_img)  # Assuming Car takes x, y, and image
 
 def draw():
     if play:
@@ -67,6 +67,9 @@ def playScreen():
     # Yellow dashes higher line
     for i in range(7):
         rect(i * width * 0.15, height * 0.65, dash_width, 5)
+        
+    car.display()
+    
 def startScreen():
     background(120, 170, 255)
     image(img, 250, 300, img.width*9, img.height*9)
