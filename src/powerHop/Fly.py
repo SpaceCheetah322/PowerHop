@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTE: Movement semi-works, GIF work-in-progress
+# NOTE: Movement semi-works, Currently working on GIF
 
 # Imports
 import time
