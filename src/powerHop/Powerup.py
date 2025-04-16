@@ -10,22 +10,24 @@ import random
 class Powerup:
     # Constructor
     def __init__(self, type):
+        print("Initiating")
         self.type = type
         self.x = random.randint(0, 500)
         self.y = random.randint(0, 500)
         # Graphics WIP
         self.time_slow = loadImage("Frogger_Clock_Powerup.gif")
-        self.double_points = loadImage("Frogger_Clock_Powerup.gif")
-        self.health_bonus = loadImage("Frogger_Clock_Powerup.gif")
+        self.double_points = loadImage("Frogger_Point_Powerup.gif")
+        self.health_bonus = loadImage("Frogger_Health_Powerup.gif")
 
     # Methods
     def display(self): # Displays fly; might house GIF frames someday
-        if self.type == 'a': 
-            image(time_slow, self.x, self.y)
-        elif self.type == 'b': 
-            image(double_points, self.x, self.y)
-        elif self.type == 'c': 
-            image(health_bonus, self.x, self.y)
+        print("Display entered")
+        if self.type == "a": 
+            image(self.time_slow, self.x, self.y)
+        elif self.type == "b": 
+            image(self.double_points, self.x, self.y)
+        elif self.type == "c": 
+            image(self.health_bonus, self.x, self.y)
 
     def collision(self):
         pass # For now!
