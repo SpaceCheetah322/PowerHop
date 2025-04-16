@@ -1,0 +1,58 @@
+import pygame
+from player import Player
+
+pygame.init()
+
+screen = pygame.display.set_mode((500, 500))
+pygame.display.set_caption("Frog")
+
+# Get image path
+image_path = 'images/Frogger_Frog_Front_Two.gif'  
+image = pygame.image.load(image_path)  # Load image
+
+# Create player instance
+player = Player(100, 100, 20, 3, image)
+
+# Framerate init
+clock = pygame.time.Clock()
+
+
+keys_pressed = {
+    pygame.K_LEFT: False,
+    pygame.K_RIGHT: False,
+    pygame.K_UP: False,
+    pygame.K_DOWN: False,
+    pygame.K_a: False,
+    pygame.K_d: False,
+    pygame.K_w: False,
+    pygame.K_s: False
+}
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        
+        
+        if event.type == pygame.KEYDOWN:
+            if event.key in keys_pressed:
+                keys_pressed[event.key] = True
+        
+        if event.type == pygame.KEYUP:
+            if event.key in keys_pressed:
+                keys_pressed[event.key] = False
+
+    # Move the player
+    player.move(keys_pressed)
+
+    # Fill screen and upd
+    screen.fill((187, 185, 195))
+    screen.blit(player.image, player.rect)
+
+    pygame.display.update()
+
+    # Control framerate
+    clock.tick(30)
+
+pygame.quit()
