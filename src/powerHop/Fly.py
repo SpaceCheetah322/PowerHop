@@ -36,3 +36,20 @@ class Fly:
         self.display()
         self.x_speed = random.randint(1, 3)
         self.y_speed = random.randint(1, 3)
+
+"""
+Code used for Testing:
+
+from Fly import Fly
+
+def setup():
+    global fly_one
+    size(500, 500)
+    fly_one = Fly()
+    fly_one.display()
+    fly_one.move()
+
+def draw():
+    background(255)
+    fly_one.move()
+"""
