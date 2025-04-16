@@ -31,3 +31,23 @@ class Powerup:
 
     def collision(self):
         pass # For now!
+
+"""
+Main Code used for Testing:
+
+from Powerup import Powerup
+
+def setup():
+    size(500, 500)
+    print("Working")
+    p1 = Powerup("a")
+    p2 = Powerup("b")
+    p3 = Powerup("c")
+    print("Created")
+    p1.display()
+    p2.display()
+    p3.display()
+
+def draw():
+    pass
+"""
