@@ -14,8 +14,8 @@ def setup():
     textFont(f, 30)
     textAlign(CENTER)
 
-    # Instantiate your existing Car class (adjust this as per your actual class)
-    car = Car(width // 2 - 30, height * 0.82, car_img)  # Assuming Car takes x, y, and image
+
+    car = Car(width // 2 - 30, height * 0.82, car_img) 
 
 def draw():
     if play:
@@ -88,7 +88,7 @@ def setup():
 def draw():
     if play:
         background(255)
-        #c1.display()
+       
     else:  
         c1.display(self)
         background(120, 170, 255)
@@ -97,7 +97,7 @@ def draw():
         text("Welcome to PowerHop", 400, 200)
         text("Press any key to start", 400,250)
 
-# Optional: Add key press to toggle
+
 def keyPressed():
     global play
     play = False
@@ -112,7 +112,7 @@ c1 = Car(50, 50)
 def setup():
     global img, f
     size(800, 600)
-    img = loadImage("logo.png")  # Ensure this is in your "data/" folder
+    img = loadImage("logo.png")  
     f = createFont("Arial", 30)
     textFont(f)
     textAlign(CENTER)
@@ -123,15 +123,14 @@ def draw():
 
     if not play:
         if img is not None:
-            image(img, 250, 300, img.width * 0.5, img.height * 0.5)  # Adjust scale as needed
+            image(img, 250, 300, img.width * 0.5, img.height * 0.5)  
 
         fill(0)
         text("Welcome to PowerHop", width / 2, 200)
         text("Press any key to start", width / 2, 250)
     else:
         background(255)  # Blank white screen when key is pressed
-        # You can also draw game elements here later
-        # c1.display()  <-- maybe put the car here later
+
 
 def keyPressed():
     global play
