@@ -18,5 +18,11 @@ A OOP program inspired by Frogger, with added powerups and modes. The user will 
 ![log](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/log.png?raw=true)
 ![GameBoard](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/gameboard.png?raw=true)
 
+## A Bunch of Random Graphics
+![Frog Top View](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/frog/Frogger_Frog.gif?raw=true)
+![Log](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Log.gif?raw=true)
+![Lily Pad](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Lily.gif?raw=true)
+![Red Truck](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Red_Truck.gif?raw=true)
+
 ## Class Diagram (1st draft by Kai, updated draft by Ava)
 ![Class Diagram](https://github.com/SpaceCheetah322/Frogger/blob/main/images/Updated_Class_Diagram.png?raw=true)
