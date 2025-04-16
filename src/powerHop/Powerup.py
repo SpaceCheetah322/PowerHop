@@ -33,7 +33,7 @@ class Powerup:
         pass # For now!
 
 """
-Main Code used for Testing:
+Code used for Testing:
 
 from Powerup import Powerup
 
