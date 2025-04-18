@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTE: Movement semi-works, Currently working on GIF
+# NOTE: GIF and Movement working! Working on collision.
 
 # Imports
 import time
