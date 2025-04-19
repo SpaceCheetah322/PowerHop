@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTES: Display is functioning! Powerup will appear in a random locaation on the screen. No collision detection yet.
+# NOTES: Display is functioning! Powerup should appear in a random location when called. No collision detection yet.
 """
 Powerups:
 a. Slow time
@@ -15,15 +15,15 @@ class Powerup:
     def __init__(self, type):
         print("Initiating")
         self.type = type
-        self.x = random.randint(0, 500)
-        self.y = random.randint(0, 500)
+        self.x = random.randint(0, 500) # 500 is temporary! Can/Will change later.
+        self.y = random.randint(0, 500) # 500 is temporary! Can/Will change later. 
         # Graphics WIP
         self.time_slow = loadImage("Frogger_Clock_Powerup.gif")
         self.double_points = loadImage("Frogger_Point_Powerup.gif")
         self.health_bonus = loadImage("Frogger_Health_Powerup.gif")
 
     # Methods
-    def display(self): # Displays fly; might house GIF frames someday
+    def display(self): # Displays powerup
         print("Display entered")
         if self.type == "a": 
             image(self.time_slow, self.x, self.y)
