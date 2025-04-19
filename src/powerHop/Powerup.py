@@ -1,9 +1,11 @@
 # Written by Katelyn
+# NOTES: Display is functioning! Powerup will appear in a random locaation on the screen. No collision detection yet.
 """
-Ideas for Powerups:
+Powerups:
 a. Slow time
 b. Point X2
 c. Extra life
+Use the letters each powerup is assigned when calling them in, eg. 'health = Powerup("c")'
 """
 import time
 import random
