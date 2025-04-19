@@ -6,6 +6,7 @@ a. Slow time
 b. Point X2
 c. Extra life
 Use the letters each powerup is assigned when calling them in, eg. 'health = Powerup("c")'
+More might be added in the future; these are some basic ones that should be easy to put in.
 """
 import time
 import random
@@ -15,11 +16,10 @@ class Powerup:
     def __init__(self, type):
         print("Initiating")
         self.type = type
-        self.x = random.randint(0, 500) # 500 is temporary! Can/Will change later.
-        self.y = random.randint(0, 500) # 500 is temporary! Can/Will change later. 
-        # Graphics WIP
+        self.x = random.randint(0, 500) # 500 is temporary! Replace with game length.
+        self.y = random.randint(0, 500) # 500 is temporary! Replace with game height.
         self.time_slow = loadImage("Frogger_Clock_Powerup.gif")
-        self.double_points = loadImage("Frogger_Point_Powerup.gif")
+        self.double_points = loadImage("Frogger_Point_Powerup.gif") # The four-pointed star on this one is a bit off-center. Nothing to be dfone about it though.
         self.health_bonus = loadImage("Frogger_Health_Powerup.gif")
 
     # Methods
