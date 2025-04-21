@@ -1,5 +1,6 @@
 # Written by Katelyn
 # NOTES: Display is functioning! Powerup should appear in a random location when called. No collision detection yet.
+# Might end up having to resize graphics.
 """
 Powerups:
 a. Slow time
@@ -26,7 +27,7 @@ class Powerup:
         self.health_bonus = loadImage("Frogger_Health_Powerup.gif") # Shows up as a red icon with a medical (+) sign,
 
     # Methods
-    def display(self): # Displays poweru
+    def display(self): # Displays powerup
         if self.type == "a": 
             image(self.time_slow, self.x, self.y)
         elif self.type == "b": 
