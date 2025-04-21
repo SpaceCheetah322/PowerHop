@@ -1,14 +1,29 @@
-#by ava
 class Log:
-    def __init__(self, x, y, speed, direction, image_path):
+    def __init__(self, x, y, direction="right", speed=2):
         self.x = x
         self.y = y
-        self.speed = speed
         self.direction = direction
-        self.image = image_path  # Placeholder for the image
+        self.speed = speed
+
+        # Load the log image
+        self.image = Image("Log.png")
+        self.image.set_size(self.image.get_width() * 0.25, self.image.get_height() * 0.25)
+        self.image.set_position(self.x, self.y)
+        add(self.image)
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
 
     def move(self):
-        pass  # Logic for car movement
+        if self.direction == 'right':
+            self.x += self.speed
+        elif self.direction == 'left':
+            self.x -= self.speed
 
-    def checkCol(self, obj):
-        pass  # Logic for checking collision with another object
+        self.image.set_position(self.x, self.y)
+
+    def display(self):
+        if self.image not in get_elements():
+            add(self.image)
+        self.image.set_position(self.x, self.y)
+
+   
