@@ -5,19 +5,23 @@ class Log:
         self.direction = direction
         self.speed = speed
 
-        # Load the log image
         self.image = Image("Log.png")
         self.image.set_size(self.image.get_width() * 0.25, self.image.get_height() * 0.25)
         self.image.set_position(self.x, self.y)
         add(self.image)
+
         self.width = self.image.get_width()
         self.height = self.image.get_height()
 
     def move(self):
-        if self.direction == 'right':
+        if self.direction == "right":
             self.x += self.speed
-        elif self.direction == 'left':
+            if self.x > 800:
+                self.x = -self.width  # wrap to left side
+        elif self.direction == "left":
             self.x -= self.speed
+            if self.x + self.width < 0:
+                self.x = 800  # wrap to right side
 
         self.image.set_position(self.x, self.y)
 
@@ -25,5 +29,3 @@ class Log:
         if self.image not in get_elements():
             add(self.image)
         self.image.set_position(self.x, self.y)
-
-   
