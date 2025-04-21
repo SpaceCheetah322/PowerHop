@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTE: GIF and Movement working! Working on collision.
+# NOTE: GIF and Movement working! Working (and failing) on collision.
 # Graphics may need to be resized.
 
 # Imports
