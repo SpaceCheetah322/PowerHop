@@ -8,10 +8,6 @@ class Car:
         crr = loadImage("Car.png")  
         crr = None
 
-
-
-
-
     def move(self):
         if self.direction == 'right':
             self.x += self.speed
