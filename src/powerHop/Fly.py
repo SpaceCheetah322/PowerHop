@@ -1,5 +1,6 @@
 # Written by Katelyn
 # NOTE: GIF and Movement working! Working on collision.
+# Graphics may need to be resized.
 
 # Imports
 import time
