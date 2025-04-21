@@ -5,7 +5,21 @@ f = None
 play = False  # Added as global
 car_img = None
 
+''' THIS CODE IS FOR LOG TO SEND MULTIPLE LOGS AFTER ONE ANOTHER
+log1 = Log(0, 200, direction="right", speed=2)
+log2 = Log(-300, 200, direction="right", speed=2)
+log2 = Log(-600, 200, direction="right", speed=2)
+logs = [log1, log2, log3]
 
+# Game loop
+def game_loop():
+    for log in logs:
+        log.move()
+        log.display()
+
+set_interval(game_loop, 30)
+
+'''
 def setup():
     global img, car_img, f, car
     size(800, 600)
