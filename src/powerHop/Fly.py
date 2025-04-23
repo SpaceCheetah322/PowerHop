@@ -49,7 +49,8 @@ class Fly:
         if (self.x == self.x_loc and self.y == self.y_loc):
             self.x_loc = random.randint(0, 500)
             self.y_loc = random.randint(0, 500)
-            time.sleep(2) # How long the fly stops; might change later!
+            # time.sleep(2) # How long the fly stops; might change later!
+            # UPDATE: time.sleep() pauses the entire application. Working on an alternative. Might make a separate timer class.
         self.display()
         # Not really necessary, and attempt to change the speed of the fly. Not entirely sure if it works.
         self.x_speed = random.randint(1, 3)
