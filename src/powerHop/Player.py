@@ -1,3 +1,12 @@
+"""
+Main class testing code is BROKEN. I do not have access to the correct files to render the fly, 
+which will cause the program to silently break. Collision detection is in place and ready to use
+
+In order to use collision detection, use:
+if player.collides_with(fly):
+    #Do something
+"""
+
 class Player:
     def __init__(self, x, y, speed, lives, img):
         self.x = x
@@ -7,6 +16,8 @@ class Player:
         self.img = img
         self.width = img.width
         self.height = img.height
+        #self.width = width
+        #self.height = height
 
     def move(self, key_code):
         if key_code == LEFT or key == 'a':
@@ -20,23 +31,37 @@ class Player:
 
     def display(self):
         image(self.img, self.x, self.y)
+        
+    def collides_with(self, other):
+        return (
+            self.x < other.x + other.width and
+            self.x + self.width > other.x and
+            self.y < other.y + other.height and
+            self.y + self.height > other.y
+        )
 
 
 
 """
 from Player import Player
+from Fly import Fly
 
 def setup():
-    global player, frog_img
+    global player, frog_img, fly_one
     size(500, 500)
     frameRate(30)
-    
     frog_img = loadImage("Frogger_Frog_Front_Two.gif")
+    fly_one = Fly()
     player = Player(100, 100, 40, 3, frog_img)
+    print(fly_one.frame_1)
 
 
 def draw():
+    print("Test")
     background(187, 185, 195)
+    print("Test")
+    fly_one.move()
+    print("Test")
     player.display()
 
 
