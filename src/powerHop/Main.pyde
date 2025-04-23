@@ -105,13 +105,16 @@ def draw():
         # checks for collision with car
         for car in cars:
             if car.check_collision == True:
-                lives =-
+                lives = lives - 1
         #checks if frog fell in water
         if currentForg.y <= .5 * height and currentFrog.y >= .1 * height and log.checkCol(currentPlayer) == False:
-            lives =-
+            lives = lives -1
         
-        # checks for points
-        if Fly.
+        # checks for points by getting flies
+        for fly in flies:
+            if Player.collides_with(fly):
+                score = score + 50
+                #need code here to add more points if powerup type b is claimed. Waiting on timer for powerups
     elif won:
         wonScreen()   
     elif dead:
@@ -158,7 +161,13 @@ def playScreen():
     # Yellow dashes higher line
     for i in range(7):
         rect(i * width * 0.15, height * 0.65, dash_width, 5)
-    
+        
+    # dashboard
+    rect(0,0, width * .2, height * .2)
+    text("Score" + str(score), width*.1, height *.05)
+    text("lives" +str(lives), width*.1, height * .1)
+    text("active powerups:", width*.1, height * .1)
+    # once timer is implemented add code to display active powerups
 #intro screen
 def startScreen():
     background(120, 170, 255)
