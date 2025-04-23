@@ -16,8 +16,8 @@ class Fly:
         self.y = 250 # Spawn location! Temporary and can/will change!
         self.x_speed = random.randint(1, 3)
         self.y_speed = random.randint(1, 3)
-        self.x_loc = random.randint(0, 500) # Replace 500 with game width!
-        self.y_loc = random.randint(0, 500) # Replace 500 with game height!
+        self.x_loc = random.randint(0, 500) # Target location! Replace 500 with game width!
+        self.y_loc = random.randint(0, 500) # Target location! Replace 500 with game height!
         # Defining Images
         self.frame_1 = loadImage("Frogger_Fly_Frame1.gif")
         self.frame_2 = loadImage("Frogger_Fly_Frame2.gif")
