@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTES: Display is functioning! Powerup should appear in a random location when called. No collision detection yet.
+# NOTES: Display is functioning! Powerup should appear in a random location when called. Collision detection!
 # Might end up having to resize graphics.
 """
 Powerups:
@@ -24,7 +24,7 @@ class Powerup:
         self.y = random.randint(0, 500) # 500 is temporary! Replace with game height.
         self.time_slow = loadImage("Frogger_Clock_Powerup.gif") # Shows up as a blue icon with a frozen clock.
         self.double_points = loadImage("Frogger_Point_Powerup.gif") # Shows up as a yellow icon witih a four-pointed star. A bit off-center, nothing to be done about it though.
-        self.health_bonus = loadImage("Frogger_Health_Powerup.gif") # Shows up as a red icon with a medical (+) sign,
+        self.health_bonus = loadImage("Frogger_Health_Powerup.gif") # Shows up as a red icon with a medical (+) sign.
 
     # Methods
     def display(self): # Displays powerup
@@ -35,23 +35,20 @@ class Powerup:
         elif self.type == "c": 
             image(self.health_bonus, self.x, self.y)
 
-    def collision(self):
-        pass # For now!
+    def collision(self, player_x, player_y):
+        distance = dist(self.x, self.y, player_x, player_y)
+        if distance < 64:
+            return True
+        else:
+            return False
 
 """
-Code used for Testing:
+To delete instance powerup:
+    if (p1.collision(player.x, player.y) == True):
+        del p1
+        p1 = None
 
-from Powerup import Powerup
-
-def setup():
-    size(500, 500)
-    p1 = Powerup("a")
-    p2 = Powerup("b")
-    p3 = Powerup("c")
-    p1.display()
-    p2.display()
-    p3.display()
-
-def draw():
-    pass
+NOTE: Might have to change display to be in ifs
+    if (p1 != None):
+        p1.display()
 """
