@@ -1,10 +1,10 @@
 # Written by Katelyn
-# NOTE: GIF working! Movement is finicky but should be fine. Working (and failing) on collision.
-# Graphics may need to be resized.
+# NOTE: GIF and Movement working! Working on collision.
 
 # Imports
 import time
 import random
+from Timer import Timer
 
 # Class
 class Fly:
@@ -14,10 +14,10 @@ class Fly:
         self.frame_num = 0
         self.x = 250 # Spawn location! Temporary and can/will change!
         self.y = 250 # Spawn location! Temporary and can/will change!
-        self.x_speed = random.randint(1, 3)
-        self.y_speed = random.randint(1, 3)
+        self.speed = 1
         self.x_loc = random.randint(0, 500) # Target location! Replace 500 with game width!
         self.y_loc = random.randint(0, 500) # Target location! Replace 500 with game height!
+        self.waiting = False
         # Defining Images
         self.frame_1 = loadImage("Frogger_Fly_Frame1.gif")
         self.frame_2 = loadImage("Frogger_Fly_Frame2.gif")
@@ -25,7 +25,8 @@ class Fly:
         self.frame_4 = loadImage("Frogger_Fly_Frame2.gif")
         # Compiling a list of frames
         self.animation = [self.frame_1, self.frame_2, self.frame_3, self.frame_4]
-
+        self.fly_time = Timer(2000)
+        
     # Methods
     def display(self): # Displays fly, uses frame_num as a counter to change frames
         image(self.animation[self.frame_num / 2], self.x, self.y) # Multiples of two to slow down animation
@@ -35,38 +36,27 @@ class Fly:
             self.frame_num = 0 # Loop
 
     def move(self): # Moves fly towards random location. If location reached, wait a couple seconds and choose a new target.
-        # Moves Left/Right
-        if (self.x < self.x_loc):
-            self.x += self.x_speed
-        elif (self.x > self.x_loc):
-            self.x -= self.x_speed
-        # Moves Up/Down
-        if (self.y < self.y_loc):
-            self.y += self.y_speed
-        elif (self.y > self.y_loc):
-            self.y -= self.y_speed
-        # Stops and chooses new target if achieved
-        if (self.x == self.x_loc and self.y == self.y_loc):
-            self.x_loc = random.randint(0, 500)
-            self.y_loc = random.randint(0, 500)
-            # time.sleep(2) # How long the fly stops; might change later!
-            # UPDATE: time.sleep() pauses the entire application. Working on an alternative. Might make a separate timer class.
+        if self.waiting == True: # If the timer is already started (and the fly is stopped)
+            if (self.fly_time.done() == True): # Checks if timer has ended
+                self.x_loc = random.randint(0, 500)
+                self.y_loc = random.randint(0, 500)
+                self.speed = 1
+                self.waiting = False
+        else:
+            # Moves Left/Right
+            if (self.x < self.x_loc):
+                self.x += self.speed
+            elif (self.x > self.x_loc):
+                self.x -= self.speed
+            # Moves Up/Down
+            if (self.y < self.y_loc):
+                self.y += self.speed
+            elif (self.y > self.y_loc):
+                self.y -= self.speed
+            # Checks if target is reached and begins timer
+            if (self.x == self.x_loc and self.y == self.y_loc):
+                time_start = False
+                self.speed = 0
+                self.fly_time.start()
+                self.waiting = True
         self.display()
-        # Not really necessary, and attempt to change the speed of the fly. Not entirely sure if it works.
-        self.x_speed = random.randint(1, 3)
-        self.y_speed = random.randint(1, 3)
-
-"""
-Code used for Testing:
-
-from Fly import Fly
-
-def setup():
-    global fly_one
-    size(500, 500)
-    fly_one = Fly()
-
-def draw():
-    background(255)
-    fly_one.move()
-"""
