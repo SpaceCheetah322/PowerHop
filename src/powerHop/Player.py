@@ -1,6 +1,5 @@
 """
-Main class testing code is BROKEN. I do not have access to the correct files to render the fly, 
-which will cause the program to silently break. Collision detection is in place and ready to use
+Collision detection is in place and ready to use
 
 In order to use collision detection, use:
 if player.collides_with(fly):
