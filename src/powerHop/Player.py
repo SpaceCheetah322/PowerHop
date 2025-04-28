@@ -45,49 +45,62 @@ class Player:
 """
 from Player import Player
 from Fly import Fly
+from Powerup import Powerup
 
 def setup():
-    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay
+    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3
     size(500, 500)
     frameRate(30)
     frog_img = loadImage("Frogger_Frog_Front_Two.gif")
     fly_one = Fly()
-    player = Player(width/2-20, 450, 40, 3, frog_img)
+    player = Player(width/2-20, 436, 40, 3, frog_img)
     print(fly_one.frame_1)
     score = 0
     fly_respawn_timer = 0
     fly_respawn_delay = 0
+    
+    p1 = Powerup("a")
+    p2 = Powerup("b")
+    p3 = Powerup("c")
+    p1.display()
+    p2.display()
+    p3.display()
 
 
 def draw():
-    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay
+    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3
     background(2, 33, 84)
     fill(177, 24, 219)
     noStroke()
     rect(0, 420, 500, 80)
+    
+
+    p1.display()
+    p2.display()
+    p3.display()
+
 
     if fly_one is not None:
             fly_one.move()
             if player.collides_with(fly_one):
                 score += 10
                 fly_one = None
-                fly_respawn_timer = frameCount  # record when it was eaten
-                fly_respawn_delay = int(random(270, 330))  # random 9-11 seconds (30 fps * 9-11 sec)
+                fly_respawn_timer = frameCount  # record when it was destroyed
+                fly_respawn_delay = int(random(270, 330))  # random 9-11 seconds. Take into account 30fps for time calc
 
     else:
         # Check if enough time passed
         if frameCount - fly_respawn_timer > fly_respawn_delay:
-            fly_one = Fly()  # spawn new fly!
+            fly_one = Fly()  # Spawn new fly!
+
+    fill(0)
+    textSize(24)
+    text("Score: " + str(score), 10, 30)
 
     player.display()
-    print(score)
-
-
-        
 
 
 def keyPressed():
     player.move(keyCode)
-
 
 """
