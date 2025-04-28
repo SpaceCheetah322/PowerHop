@@ -25,6 +25,11 @@ class Player:
             self.y -= self.speed
         elif key_code == DOWN or key == 's':
             self.y += self.speed
+    
+        # Keep the player inside the screen
+        self.x = constrain(self.x, 0, width - self.width)
+        self.y = constrain(self.y, 0, height - self.height)
+
 
     def display(self):
         image(self.img, self.x, self.y)
@@ -36,8 +41,6 @@ class Player:
             self.y < other.y + other.height and
             self.y + self.height > other.y
         )
-
-
 
 """
 from Player import Player
