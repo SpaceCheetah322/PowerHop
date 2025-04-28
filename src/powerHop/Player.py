@@ -1,11 +1,3 @@
-"""
-Collision detection is in place and ready to use. Class NEEDS: a height and a width
-
-In order to use collision detection, use:
-if player.collides_with(fly):
-    #Do something
-"""
-
 class Player:
     def __init__(self, x, y, speed, lives, img):
         self.x = x
@@ -48,7 +40,7 @@ from Fly import Fly
 from Powerup import Powerup
 
 def setup():
-    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3
+    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives
     size(500, 500)
     frameRate(30)
     frog_img = loadImage("Frogger_Frog_Front_Two.gif")
@@ -58,6 +50,7 @@ def setup():
     score = 0
     fly_respawn_timer = 0
     fly_respawn_delay = 0
+    lives = 3
     
     p1 = Powerup("a")
     p2 = Powerup("b")
@@ -68,7 +61,7 @@ def setup():
 
 
 def draw():
-    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3
+    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives
     background(2, 33, 84)
     fill(177, 24, 219)
     noStroke()
@@ -102,5 +95,6 @@ def draw():
 
 def keyPressed():
     player.move(keyCode)
+
 
 """
