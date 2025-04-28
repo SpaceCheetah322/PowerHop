@@ -1,6 +1,7 @@
 class Car:
     def __init__(self, x, y, direction="right", speed=5, vehicle_type="car"):
         self.x = x
+        self.start_x = x
         self.y = y
         self.direction = direction
         self.speed = speed
@@ -26,11 +27,11 @@ class Car:
         if self.direction == 'right':
             self.x += self.speed
             if self.x > 800:
-                self.x = -self.width
+                self.x = self.start_x
         elif self.direction == 'left':
             self.x -= self.speed
             if self.x + self.width < 0:
-                self.x = 800
+                self.x = self.start_x
 
         self.image.set_position(self.x, self.y)
 
