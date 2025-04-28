@@ -52,19 +52,20 @@ def setup():
     frameRate(30)
     frog_img = loadImage("Frogger_Frog_Front_Two.gif")
     fly_one = Fly()
-    player = Player(100, 100, 40, 3, frog_img)
+    player = Player(width/2-20, 450, 40, 3, frog_img)
     print(fly_one.frame_1)
 
 
 def draw():
-    print("Test")
-    background(187, 185, 195)
-    print("Test")
+    background(2, 33, 84)
+    fill(177, 24, 219)
+    noStroke()
+    rect(0,420,500,80)
     fly_one.move()
-    print("Test")
     player.display()
 
 
 def keyPressed():
     player.move(keyCode)
+
 """
