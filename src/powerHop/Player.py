@@ -1,5 +1,5 @@
 """
-Collision detection is in place and ready to use
+Collision detection is in place and ready to use. Class NEEDS: a height and a width
 
 In order to use collision detection, use:
 if player.collides_with(fly):
