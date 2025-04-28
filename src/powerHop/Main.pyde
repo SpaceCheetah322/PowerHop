@@ -1,4 +1,21 @@
-# by Ava
+\# by Ava
+
+"""
+Processing was having glitches so this doesn't run but here is a detailed explanation of what should happen: 
+Opens to a screen with a light blue background and the powerhop logo with text prompting the user to press
+any key to get advance to the next screen. Once a key is pressed it switches to a screen with a green section
+with two roads of cars at the bottom and a blue section with logs moving in it. There are 5 sections of land at the top.
+The frog starts at the bottom of the screen and can move using the arrow keys or w, a, s, and d. Every 3 seconds a fly
+appears and every 4 seconds a powerup appears. There are 3 types of powerups that can appear, the type is chosen 
+randomly. The player can collect the flies by colliding with them to get points. The player can collide with a powerup 
+to get it's effect. The effects are: slow time, double points, and health bonus. The effects last for 2 seconds. 
+The player is trying to get to the land chunks at the end. Once one frog makes it, a new frog appears. The
+player has to get all 5 frogs to the end while getting as many points as possible. If the player gets hit by a car
+or falls in the water they lose a life. Once the player loses all of their lives they die and are taken to a screen 
+telling them they lost and asking if they want to play again. If the player wins they are taken to a simallar screen
+exact it says that they won, their points, and remaining lives.
+
+"""
 
 # imports
 from Car import Car
@@ -15,6 +32,8 @@ play = False
 car_img = None
 cars = []
 powups = []
+activePowups[]
+expirations[]
 flies = []
 logs = []
 score = 0 
@@ -115,6 +134,33 @@ def draw():
             if Player.collides_with(fly):
                 score = score + 50
                 #need code here to add more points if powerup type b is claimed. Waiting on timer for powerups
+                
+                
+        # adds claimed powerups to a class of active powerups        
+        for p in powups:
+            if play.collides_with(p):
+                activePowups.append(p)
+                #starts timer for powerup
+                expirationTime = time + 2000
+                expirations.append(experationTime)
+                
+                #checks if timer has ended
+        for t in expirations:
+             if t == expirationTime:
+                 expiringPowup = activePowups[expirations.index[t]]
+                 activePowups.remove(expiringPowup)                    
+                               
+          #loops through powerup effects                         
+        for p in activePowups:
+            expireTime = time + 2000        
+            if p(letter) == "a":
+                #method to execute powerup once katelyn adds it
+            elif p(letter) == "b":
+                #method to execute powerup once katelyn adds it
+            else:
+                #method to execute powerup once katelyn adds it
+              
+                #goes through screens for when game is over  
     elif won:
         wonScreen()   
     elif dead:
