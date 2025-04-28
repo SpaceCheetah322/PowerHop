@@ -52,12 +52,12 @@ def setup():
     textAlign(CENTER)
     
 # Instantiate Car class 
-    cars.append(Car(100,height*.6))
-    cars.append(Car(200,height*.6))
-    cars.append(Car(0,height*.6))
-    cars.append(Car(100,height*.8))
-    cars.append(Car(300,height*.8))
-    cars.append(Car(400,height*.8))
+    cars.append(Car(100,height*.6, direction="right", speed=5, vehicle_type="car"))
+    cars.append(Car(200,height*.6, direction="right", speed=5, vehicle_type="truck"))
+    cars.append(Car(0,height*.6, direction="right", speed=5, vehicle_type="car"))
+    cars.append(Car(100,height*.8, direction="right", speed=5, vehicle_type="truck"))
+    cars.append(Car(300,height*.8, direction="right", speed=5, vehicle_type="car"))
+    cars.append(Car(400,height*.8, direction="right", speed=5, vehicle_type="car"))
     
 # Instantiate Log class
     logs.append(Log(0,height*.1))
