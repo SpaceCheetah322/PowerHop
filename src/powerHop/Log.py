@@ -1,6 +1,7 @@
 class Log:
     def __init__(self, x, y, direction="right", speed=2):
         self.x = x
+        self.start_x = x
         self.y = y
         self.direction = direction
         self.speed = speed
@@ -17,11 +18,11 @@ class Log:
         if self.direction == "right":
             self.x += self.speed
             if self.x > 800:
-                self.x = -self.width  # wrap to left side
+                self.x = self.start_x  
         elif self.direction == "left":
             self.x -= self.speed
             if self.x + self.width < 0:
-                self.x = 800  # wrap to right side
+                self.x = self.start_x 
 
         self.image.set_position(self.x, self.y)
 
