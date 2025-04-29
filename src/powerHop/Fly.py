@@ -12,9 +12,11 @@ class Fly:
     def __init__(self): # Initialization
         # Variable Declaration
         self.frame_num = 0
-        self.x = 250 # Spawn location! Temporary and can/will change!
-        self.y = 250 # Spawn location! Temporary and can/will change!
+        self.x = random.randint(100, 400) # Spawn location! Temporary and can/will change!
+        self.y = random.randint(100, 400) # Spawn location! Temporary and can/will change!
         self.speed = 1
+        self.height = 30 #For collision Detection
+        self.width = 30 #For collision Detection
         self.x_loc = random.randint(0, 500) # Target location! Replace 500 with game width!
         self.y_loc = random.randint(0, 500) # Target location! Replace 500 with game height!
         self.waiting = False
@@ -29,7 +31,7 @@ class Fly:
         
     # Methods
     def display(self): # Displays fly, uses frame_num as a counter to change frames
-        image(self.animation[self.frame_num / 2], self.x, self.y) # Multiples of two to slow down animation
+        image(self.animation[self.frame_num // 2], self.x, self.y) # Multiples of two to slow down animation
         if (self.frame_num >= 0 and self.frame_num < 6):
             self.frame_num += 1
         elif (self.frame_num == 6):
