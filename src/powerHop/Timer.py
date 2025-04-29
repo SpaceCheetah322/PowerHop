@@ -15,3 +15,21 @@ class Timer:
             return True
         else:
             return False
+
+
+"""
+This is a temporary instance of the timer class, currently compatible with all of the files. This should work and cause no errors.
+
+# -*- coding: utf-8 -*-
+class Timer:
+    def __init__(self, total_time):
+        self.saved_time = 0
+        self.total_time = total_time
+
+    def start(self):
+        self.saved_time = millis()
+
+    def done(self):
+        return (millis() - self.saved_time) > self.total_time
+
+"""
