@@ -43,12 +43,15 @@ class Powerup:
             return False
 
 """
-To delete instance powerup:
-    if (p1.collision(player.x, player.y) == True):
-        del p1
-        p1 = None
-
-NOTE: Might have to change display to be in ifs
-    if (p1 != None):
-        p1.display()
+Test Code Snippet: (Assume p1 is a powerup already called in)
+    if (p1 != None): # This prevents the program from trying to display it after it gets deleted.
+        p1.display() 
+        if (p1.collision(player.x, player.y) == True):
+            if p1.type == "a":
+                pass
+            elif p1.type == "b":
+                score += 10
+            elif p1.type == "c":
+                player.lives += 1
+            p1 = None
 """
