@@ -35,11 +35,12 @@ class Powerup:
         elif self.type == "c": 
             image(self.health_bonus, self.x, self.y)
 
-    def collision(self, player_x, player_y):
-        distance = dist(self.x, self.y, player_x, player_y)
+    def collision(self, player, log, car):
+        distance = dist(self.x, self.y, player.x, player.y)
         if distance < 64:
             if self.type == "a": # In theory, just half the car and log/lily speed. Haven't actually tried yet.
-                pass
+                car.speed /= 2
+                log.speed /= 2
             elif self.type == "b":
                 player.score += 10
             elif self.type == "c":
