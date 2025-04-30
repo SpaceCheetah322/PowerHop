@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTE: GIF and Movement working! Working on collision.
+# NOTE: GIF, movement and collision functional!
 
 # Imports
 import time
@@ -62,3 +62,11 @@ class Fly:
                 self.fly_time.start()
                 self.waiting = True
         self.display()
+
+    def collision(self, player):
+        distance = dist(self.x, self.y, player.x, player.y)
+        if distance < 64:
+            player.score *= 2
+            return True
+        else:
+            return False
