@@ -38,6 +38,12 @@ class Powerup:
     def collision(self, player_x, player_y):
         distance = dist(self.x, self.y, player_x, player_y)
         if distance < 64:
+            if self.type == "a": # In theory, just half the car and log/lily speed. Haven't actually tried yet.
+                pass
+            elif self.type == "b":
+                player.score += 10
+            elif self.type == "c":
+                player.lives += 1
             return True
         else:
             return False
@@ -47,12 +53,6 @@ Test Code Snippet: (Assume p1 is a powerup already called in)
     if (p1 != None): # This prevents the program from trying to display it after it gets deleted.
         p1.display() 
         if (p1.collision(player.x, player.y) == True):
-            if p1.type == "a":
-                logs.speed /= 2
-                cars.speed /= 2
-            elif p1.type == "b":
-                score += 10
-            elif p1.type == "c":
                 player.lives += 1
             p1 = None
 """
