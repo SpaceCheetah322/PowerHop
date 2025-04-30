@@ -48,7 +48,8 @@ Test Code Snippet: (Assume p1 is a powerup already called in)
         p1.display() 
         if (p1.collision(player.x, player.y) == True):
             if p1.type == "a":
-                pass
+                logs.speed /= 2
+                cars.speed /= 2
             elif p1.type == "b":
                 score += 10
             elif p1.type == "c":
