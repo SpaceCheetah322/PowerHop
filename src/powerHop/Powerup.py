@@ -1,5 +1,5 @@
 # Written by Katelyn
-# NOTES: Display and collision functioning! Powerup should appear in a random location when called. Effects partially usable.
+# NOTES: Display and collision functioning! Powerup should appear in a random location when called. Effects usable(?)
 # Might end up having to resize graphics.
 """
 Powerups:
