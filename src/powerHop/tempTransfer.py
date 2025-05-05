@@ -2,9 +2,14 @@ from Player import Player
 from Fly import Fly
 from Powerup import Powerup
 
+game_started = False
+
 def setup():
-    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives
-    size(500, 500)
+    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives, start_screen, game_started, car, car_img
+    start_screen = loadImage("start_screen.png")  # Make sure this file exists in your project
+    game_started = False
+
+    size(800, 600)
     frameRate(30)
     frog_img = loadImage("Frogger_Frog_Front_Two.gif")
     fly_one = Fly()
@@ -15,39 +20,71 @@ def setup():
     fly_respawn_delay = 0
     lives = 3
     
-    p1 = Powerup("a")
-    p2 = Powerup("b")
-    p3 = Powerup("c")
-    p1.display()
-    p2.display()
-    p3.display()
+    p1 = Powerup("c")  
 
 
 def draw():
-    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives
-    background(2, 33, 84)
-    fill(177, 24, 219)
-    noStroke()
-    rect(0, 420, 500, 80)
+    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives, game_started, car, car_img
+
+    if not game_started:
+        background(0)
+        image(start_screen, 0, 0, width, height)
+        return  # Skip the game logic until started
+
+    # --- Your actual game code starts here ---
+
+    if (p1 != None): # This prevents the program from trying to display it after it gets deleted.
+        p1.display() 
+        if (p1.collides_with(p1) == True):
+                score += 1
+                p1 = None
+
     
+    background(2, 33, 84)
+    background(255)
+    #street
+    fill(107, 103, 110)
+    rect(0, height * 0.8, width, height * 0.1)  # Adjust for screen size
+    rect(0, height * 0.6, width, height * 0.1)
 
-    p1.display()
-    p2.display()
-    p3.display()
+    # Water blue
+    fill(85, 153, 242)
+    rect(0, 0, width, height * 0.5)
 
+    # Grass green
+    fill(16, 125, 45)
+    rect(0, height * 0.9, width, height * 0.1)
+    rect(0, height * 0.7, width, height * 0.1)
+    rect(0, height * 0.5, width, height * 0.1)
 
+    # Safe goals level ended
+    rect(0, 0, width * 0.125, height * 0.1)
+    rect(width * 0.225, 0, width * 0.125, height * 0.1)
+    rect(width * 0.45, 0, width * 0.125, height * 0.1)
+    rect(width * 0.675, 0, width * 0.125, height * 0.1)
+    rect(width * 0.9, 0, width * 0.125, height * 0.1)
+
+    # Yellow dashes
+    fill(232, 229, 30)
+    dash_width = width * 0.075  # Set width of the dashes relative to canvas size
+    rect(0, height * 0.85, dash_width, 5)
+    for i in range(1, 7):
+        rect(i * width * 0.15, height * 0.85, dash_width, 5)
+
+    # Yellow dashes higher line
+    for i in range(7):
+        rect(i * width * 0.15, height * 0.65, dash_width, 5)
+    
     if fly_one is not None:
-            fly_one.move()
-            if player.collides_with(fly_one):
-                score += 10
-                fly_one = None
-                fly_respawn_timer = frameCount  # record when it was destroyed
-                fly_respawn_delay = int(random(270, 330))  # random 9-11 seconds. Take into account 30fps for time calc
-
+        fly_one.move()
+        if player.collides_with(fly_one):
+            score += 10
+            fly_one = None
+            fly_respawn_timer = frameCount
+            fly_respawn_delay = int(random(270, 330))
     else:
-        # Check if enough time passed
         if frameCount - fly_respawn_timer > fly_respawn_delay:
-            fly_one = Fly()  # Spawn new fly!
+            fly_one = Fly()
 
     fill(0)
     textSize(24)
@@ -58,11 +95,69 @@ def draw():
 
 def keyPressed():
     player.move(keyCode)
+    
+def mousePressed():
+    global game_started
+    if not game_started:
+        game_started = True
 
 
 
 
 
+
+
+
+
+class Car:
+    def __init__(self, x, y, direction="right", speed=5, vehicle_type="car"):
+        self.x = x
+        self.start_x = x
+        self.y = y
+        self.direction = direction
+        self.speed = speed
+        self.vehicle_type = vehicle_type
+
+
+        image_file = "Car.png"
+        if self.vehicle_type == "truck":
+            image_file = "Truck.png"
+
+        self.image = Image(image_file)
+        
+
+        scale = 0.2 if self.vehicle_type == "car" else 0.3
+        self.image.set_size(self.image.get_width() * scale, self.image.get_height() * scale)
+        self.image.set_position(self.x, self.y)
+        add(self.image)
+
+        self.width = self.image.get_width()
+        self.height = self.image.get_height()
+
+    def move(self):
+        if self.direction == 'right':
+            self.x += self.speed
+            if self.x > 800:
+                self.x = self.start_x
+        elif self.direction == 'left':
+            self.x -= self.speed
+            if self.x + self.width < 0:
+                self.x = self.start_x
+
+        self.image.set_position(self.x, self.y)
+
+    def check_collision(self, frog):
+        if (frog.x < self.x + self.width and
+            frog.x + frog.width > self.x and
+            frog.y < self.y + self.height and
+            frog.y + frog.height > self.y):
+            return True
+        return False
+
+    def display(self):
+        if self.image not in get_elements():
+            add(self.image)
+        self.image.set_position(self.x, self.y)
 
 
 
@@ -86,11 +181,11 @@ class Fly:
     def __init__(self): # Initialization
         # Variable Declaration
         self.frame_num = 0
-        self.height = 30
-        self.width = 30
-        self.x = random.randint(100, 400)
-        self.y = random.randint(100, 400)
+        self.x = random.randint(100, 400) # Spawn location! Temporary and can/will change!
+        self.y = random.randint(100, 400) # Spawn location! Temporary and can/will change!
         self.speed = 1
+        self.height = 30 #For collision Detection
+        self.width = 30 #For collision Detection
         self.x_loc = random.randint(0, 500) # Target location! Replace 500 with game width!
         self.y_loc = random.randint(0, 500) # Target location! Replace 500 with game height!
         self.waiting = False
@@ -142,11 +237,16 @@ class Fly:
 
 
 
+
+
+
+
+
 class Player:
     def __init__(self, x, y, speed, lives, img):
         self.x = x
         self.y = y
-        self.speed = 40
+        self.speed = 60
         self.lives = lives
         self.img = img
         self.width = img.width
@@ -190,7 +290,7 @@ class Player:
 
 
 # Written by Katelyn
-# NOTES: Display is functioning! Powerup should appear in a random location when called. Collision detection also functional!
+# NOTES: Display and collision functioning! Powerup should appear in a random location when called. Effects usable(?)
 # Might end up having to resize graphics.
 """
 Powerups:
@@ -213,6 +313,8 @@ class Powerup:
         self.type = type
         self.x = random.randint(0, 500) # 500 is temporary! Replace with game length.
         self.y = random.randint(0, 500) # 500 is temporary! Replace with game height.
+        self.width = 30
+        self.height = 30
         self.time_slow = loadImage("Frogger_Clock_Powerup.gif") # Shows up as a blue icon with a frozen clock.
         self.double_points = loadImage("Frogger_Point_Powerup.gif") # Shows up as a yellow icon witih a four-pointed star. A bit off-center, nothing to be done about it though.
         self.health_bonus = loadImage("Frogger_Health_Powerup.gif") # Shows up as a red icon with a medical (+) sign.
@@ -226,33 +328,14 @@ class Powerup:
         elif self.type == "c": 
             image(self.health_bonus, self.x, self.y)
 
-    def collision(self, player_x, player_y):
-        distance = dist(self.x, self.y, player_x, player_y)
-        if distance < 64:
-            return True
-        else:
-            return False
+    def collides_with(self, other):
+        return (
+            self.x < other.x + other.width and
+            self.x + self.width > other.x and
+            self.y < other.y + other.height and
+            self.y + self.height > other.y
+        )
 
-
-
-
-
-
-
-
-
-
-# -*- coding: utf-8 -*-
-class Timer:
-    def __init__(self, total_time):
-        self.saved_time = 0
-        self.total_time = total_time
-
-    def start(self):
-        self.saved_time = millis()
-
-    def done(self):
-        return (millis() - self.saved_time) > self.total_time
 
 
 
