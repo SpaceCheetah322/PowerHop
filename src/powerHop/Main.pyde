@@ -17,6 +17,21 @@ exact it says that they won, their points, and remaining lives.
 
 """
 
+''' THIS IS CODE TO IMPUT CARS
+cars = []
+
+# Add car to the screen
+cars.append(Car(200, height * 0.6, direction="right", speed=5, vehicle_type="truck"))
+
+def update():
+    for car in cars:
+        car.move()
+
+def draw():
+    for car in cars:
+        car.display()
+'''
+
 # imports
 from Car import Car
 from Fly import Fly
