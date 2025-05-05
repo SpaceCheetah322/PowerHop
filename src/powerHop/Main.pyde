@@ -26,7 +26,6 @@ from Powerup import Powerup
 import random
 
 # defines variables
-logo = None
 f = None
 play = False  
 car_img = None
