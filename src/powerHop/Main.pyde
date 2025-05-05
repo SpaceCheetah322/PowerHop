@@ -125,7 +125,7 @@ def draw():
             if car.check_collision == True:
                 lives = lives - 1
         #checks if frog fell in water
-        if currentForg.y <= .5 * height and currentFrog.y >= .1 * height and log.checkCol(currentPlayer) == False:
+        if currentFrog.y <= .5 * height and currentFrog.y >= .1 * height and log.checkCol(currentPlayer) == False:
             lives = lives -1
         
         # checks for points by getting flies
