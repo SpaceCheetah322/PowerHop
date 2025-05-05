@@ -1,6 +1,5 @@
 # Inspired by a Processing class written by Daniel Shiffman. Rewritten by Katelyn.
 # Should work as a countdown; use start() when you want to start counting down, and done() to check if it's finished.
-# NOTE: Not entirely sure this works yet.
 class Timer:
     def __init__(self, temp_total_time):
         self.saved_time = 0
@@ -15,4 +14,13 @@ class Timer:
             return True
         else:
             return False
+"""
+Example Usage:
+def setup():
+    new_timer = Timer(1000) # 1000 = 1 second timer
+    new_timer.start()
 
+def draw():
+    if new_timer.done():
+        print("Finished!")
+"""
