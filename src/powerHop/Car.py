@@ -10,7 +10,7 @@ class Car:
 
         image_file = "Car.png"
         if self.vehicle_type == "truck":
-            image_file = "Truck.png"
+            image_file = "Frogger_Red_Truck.gif"
 
         self.image = Image(image_file)
         
