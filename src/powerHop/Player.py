@@ -7,6 +7,7 @@ class Player:
         self.img = img
         self.width = img.width
         self.height = img.height
+        self.score = 0
 
     def move(self, key_code):
         if key_code == LEFT or key == 'a':
