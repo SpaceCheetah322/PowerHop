@@ -17,12 +17,12 @@ To run the app click on the code icon in github, download the whole repository a
 ![Start screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Start.png?raw=true)
 ![Play Screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Play.png?raw=true)
 ![End Screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_End.png?raw=true)
+
+## Other game graphics
 ![Car](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/Screenshot:car.png?raw=true)
 ![Truck](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/Truck.png?raw=true)
 ![log](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/log.png?raw=true)
 ![GameBoard](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/gameboard.png?raw=true)
-
-## A Bunch of Random Graphics
 ![Frog Top View](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/frog/Frogger_Frog.gif?raw=true)
 ![Log](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Log.gif?raw=true)
 ![Lily Pad](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Lily.gif?raw=true)
