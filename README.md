@@ -5,12 +5,12 @@ An object-oriented program inspired by Frogger, with added powerups that give th
 ## To Run
 Click on the code icon in GitHub, download the whole repository as a zip file, and then open main.pyde in Processing IDE. Make sure Python Mode is installed!
 
-# Roles
+## Roles
 * Ava - main class
 * Kai - player class
 * Sofia - car and log class
 * Katelyn - fly and powerup class
-..* everyone helped test the code along the way and make graphics
+Everyone helped test the code along the way and make graphics!
 
 
 ## GUI mockups (play screens created by Katelyn and Sofia, added by Ava. Logo by Ava. Car and Background by Sofia.)
