@@ -10,7 +10,7 @@ Click on the code icon in GitHub, download the whole repository as a zip file, a
 * Kai - player class
 * Sofia - car and log class
 * Katelyn - fly and powerup class
-* everyone helped test the code along the way and madke graphics
+** everyone helped test the code along the way and madke graphics
 
 
 ## GUI mockups (play screens created by Katelyn and Sofia, added by Ava. Logo by Ava. Car and Background by Sofia.)
