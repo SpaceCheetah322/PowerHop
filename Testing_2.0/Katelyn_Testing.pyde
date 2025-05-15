@@ -49,7 +49,7 @@ def draw():
     rect(0, 0, 100, 50, 7)
     textSize(20)
     fill(0)
-    if (player != None):
+    if (player != None): # Health and Score!
         text("Score: " + str(player.score), 10, 30)
         player.display()
         lives = player.lives
