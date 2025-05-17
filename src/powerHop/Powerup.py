@@ -1,18 +1,4 @@
 # Written by Katelyn
-# NOTES: Display and collision functioning! Powerup should appear in a random location when called. Effects usable(?)
-# Might end up having to resize graphics.
-"""
-Powerups:
-a. Slow time
-b. Point X2
-c. Extra life
-Use the letters each powerup is assigned when calling them in, eg. 'health = Powerup("c")'
-More might be added in the future; these are some basic ones that should be easy to put in.
-
-Other Ideas:
-d. Luck boost (Increased chances of powerup/fly spawning?)
-e. Long Leap (Jump further. Not sure if this is as helpful to the player as it seems.)
-"""
 import time
 import random
 
@@ -20,8 +6,10 @@ class Powerup:
     # Constructor
     def __init__(self, type):
         self.type = type
-        self.x = random.randint(0, 500) # 500 is temporary! Replace with game length.
-        self.y = random.randint(0, 500) # 500 is temporary! Replace with game height.
+        self.x = random.randint(100, 700)
+        self.y = random.randint(100, 500) 
+        self.width = 10
+        self.height = 10
         self.time_slow = loadImage("Frogger_Clock_Powerup.gif") # Shows up as a blue icon with a frozen clock.
         self.double_points = loadImage("Frogger_Point_Powerup.gif") # Shows up as a yellow icon witih a four-pointed star. A bit off-center, nothing to be done about it though.
         self.health_bonus = loadImage("Frogger_Health_Powerup.gif") # Shows up as a red icon with a medical (+) sign.
@@ -35,25 +23,11 @@ class Powerup:
         elif self.type == "c": 
             image(self.health_bonus, self.x, self.y)
 
-    def collision(self, player, log, car):
-        distance = dist(self.x, self.y, player.x, player.y)
-        if distance < 64:
-            if self.type == "a": # In theory, just half the car and log/lily speed. Haven't actually tried yet.
-                car.speed /= 2
-                log.speed /= 2
-            elif self.type == "b":
-                player.score += 10
-            elif self.type == "c":
-                player.lives += 1
-            return True
-        else:
-            return False
+    def collides_with(self, other):
+        return (
+            self.x < other.x + other.width and
+            self.x + self.width > other.x and
+            self.y < other.y + other.height and
+            self.y + self.height > other.y
+        )
 
-"""
-Test Code Snippet: (Assume p1 is a powerup already called in)
-    if (p1 != None): # This prevents the program from trying to display it after it gets deleted.
-        p1.display() 
-        if (p1.collision(player.x, player.y) == True):
-                player.lives += 1
-            p1 = None
-"""
