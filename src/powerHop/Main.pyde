@@ -1,257 +1,397 @@
-\# by Ava
-
-"""
-Processing was having glitches so this doesn't run but here is a detailed explanation of what should happen: 
-Opens to a screen with a light blue background and the powerhop logo with text prompting the user to press
-any key to get advance to the next screen. Once a key is pressed it switches to a screen with a green section
-with two roads of cars at the bottom and a blue section with logs moving in it. There are 5 sections of land at the top.
-The frog starts at the bottom of the screen and can move using the arrow keys or w, a, s, and d. Every 3 seconds a fly
-appears and every 4 seconds a powerup appears. There are 3 types of powerups that can appear, the type is chosen 
-randomly. The player can collect the flies by colliding with them to get points. The player can collide with a powerup 
-to get it's effect. The effects are: slow time, double points, and health bonus. The effects last for 2 seconds. 
-The player is trying to get to the land chunks at the end. Once one frog makes it, a new frog appears. The
-player has to get all 5 frogs to the end while getting as many points as possible. If the player gets hit by a car
-or falls in the water they lose a life. Once the player loses all of their lives they die and are taken to a screen 
-telling them they lost and asking if they want to play again. If the player wins they are taken to a simallar screen
-exact it says that they won, their points, and remaining lives.
-
-"""
-
-''' THIS IS CODE TO IMPUT CARS
-cars = []
-
-# Add car to the screen
-cars.append(Car(200, height * 0.6, direction="right", speed=5, vehicle_type="truck"))
-
-def update():
-    for car in cars:
-        car.move()
-
-def draw():
-    for car in cars:
-        car.display()
-'''
-
-# imports
-from Car import Car
+from Player import Player
 from Fly import Fly
-from Log import Log
-from Player import Player 
 from Powerup import Powerup
-import random
+from Car import Car
+from Log import Log
+from Timer import Timer
 
-# defines variables
-f = None
-play = False  
-car_img = None
-cars = []
-powups = []
-activePowups[]
-expirations[]
-flies = []
-logs = []
-score = 0 
-time = millis()
-letter = "d"
-Frog_img = None
-lives = 0
+keyPressedOnce = False
+death_cause         = ""         
+death_by_car_img    = None
+death_by_water_img  = None
+death_by_timer_img  = None
+game_started = False
+game_over = False
+score = 0
+fly_respawn_timer = 0
+fly_respawn_delay = 0
+slowdown_active = False
+slowdown_start_frame = 0
+slowdown_duration = 300  #10 seconds
+player_dead = False
+death_timer = 0
+level = 1
+last_known_lives = 0
 
+p1_respawn_timer = 0
+p2_respawn_timer = 0
+p3_respawn_timer = 0
+p1_respawn_delay = 0
+p2_respawn_delay = 0
+p3_respawn_delay = 0
+    
 def setup():
-    global logo, car_img, f, car
+    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, death_by_car_img, death_by_water_img, death_by_timer_img, death_cause, p1, p2, p3, start_screen, game_started, car, back_img, cars, heart, level, base_car_speeds, base_log_speeds
+    global player_dead, death_timer, saved_lives, game_over, game_over_image, logs, last_known_lives, game_timer, timer_duration, p1_respawn_timer, p2_respawn_timer, p3_respawn_timer, p1_respawn_delay, p2_respawn_delay, p3_respawn_delay
+    global lily_pads, occupied_pads, pixelFont, car_original_speeds, log_original_speeds, slowdown_active, slowdown_start_frame, slowdown_duration
+    
     size(800, 600)
-    logo = loadImage("logo.png")
-    background(100, 100, 255)
-    f = createFont("Arial", 30)
-    textFont(f, 30)
-    textAlign(CENTER)
+    frameRate(30)
     
-# Instantiate Car class 
-    cars.append(Car(100,height*.6, direction="right", speed=5, vehicle_type="car"))
-    cars.append(Car(200,height*.6, direction="right", speed=5, vehicle_type="truck"))
-    cars.append(Car(0,height*.6, direction="right", speed=5, vehicle_type="car"))
-    cars.append(Car(100,height*.8, direction="right", speed=5, vehicle_type="truck"))
-    cars.append(Car(300,height*.8, direction="right", speed=5, vehicle_type="car"))
-    cars.append(Car(400,height*.8, direction="right", speed=5, vehicle_type="car"))
+    start_screen = loadImage("Start.gif")
+    game_over_image = loadImage("game_over_image.png") 
+    death_by_car_img = loadImage("death_by_car.png")
+    death_by_water_img = loadImage("death_by_water.png")
+    death_by_timer_img = loadImage("death_by_car.png")
+    frog_img = loadImage("Frogger_Frog_Front_Two.gif")
+    back_img = loadImage("backdrop.png")
+    heart = loadImage("Frogger_Life_Icon.gif")
     
-# Instantiate Log class
-    logs.append(Log(0,height*.1))
-    logs.append(Log(200,height*.1))
-    logs.append(Log(400,height*.1))
-    logs.append(Log(0,height*.2))
-    logs.append(Log(300,height*.2))
-    logs.append(Log(100,height*.3))
-    logs.append(Log(500,height*.3))
-    logs.append(Log(700,height*.3))
-    logs.append(Log(0,height*.4))
-    logs.append(Log(650,height*.5))
-    logs.append(Log(320,height*.5))
-    logs.append(Log(100,height*.5))
-    
-    #instantiate first player
-    p1 = Player(width/2,height,3,3,Frog_img)
-    currentFrog = p1
+    fly_one = Fly()
+    player = Player(width/2, 548, 40, 3, frog_img)
 
-#controls game screens and objects
+    p1 = Powerup("c")
+    p2 = Powerup("b")
+    p3 = Powerup("a")
+    
+    pixelFont = createFont("PressStart2P-Regular.ttf", 16)
+    textFont(pixelFont)
+    
+    
+    cars = []
+    logs = []
+    car_original_speeds = []
+    log_original_speeds = []
+    
+
+    logs.append(Log(-310, -10, "right", speed=4))
+    logs.append(Log(1230, 35, "left", speed=6))
+    logs.append(Log(-950, 80, "right", speed=7))
+    logs.append(Log(-640, 125, "right", speed=3))
+    logs.append(Log(900, 170, "left", speed=5))
+    
+    logs.append(Log(-810, -10, "right", speed=4))
+    logs.append(Log(1730, 35, "left", speed=6))
+    logs.append(Log(-1450, 80, "right", speed=7))
+    logs.append(Log(-1140, 125, "right", speed=3))
+    logs.append(Log(1400, 170, "left", speed=5))
+    
+
+    cars.append(Car(-10, 515, direction="right", speed=4, vehicle_type="car"))
+    cars.append(Car(-160, 515, direction="right", speed=4, vehicle_type="car"))
+    cars.append(Car(-310, 515, direction="right", speed=4, vehicle_type="car"))
+    
+    cars.append(Car(800, 465, direction="left", speed=2, vehicle_type="truck"))
+    cars.append(Car(950, 465, direction="left", speed=2, vehicle_type="truck"))
+    cars.append(Car(1100, 465, direction="left", speed=2, vehicle_type="truck"))
+    
+    cars.append(Car(-30, 425, direction="right", speed=9, vehicle_type="car"))
+    cars.append(Car(-180, 425, direction="right", speed=9, vehicle_type="car"))
+    cars.append(Car(-330, 425, direction="right", speed=9, vehicle_type="car"))
+    
+    cars.append(Car(-30, 375, direction="right", speed=7, vehicle_type="truck"))
+    cars.append(Car(-180, 375, direction="right", speed=7, vehicle_type="truck"))
+    cars.append(Car(-330, 375, direction="right", speed=7, vehicle_type="truck"))
+    
+    cars.append(Car(800, 330, direction="left", speed=5, vehicle_type="car"))
+    cars.append(Car(950, 330, direction="left", speed=5, vehicle_type="car"))
+    cars.append(Car(1100, 330, direction="left", speed=5, vehicle_type="car"))
+    
+    lily_pads = [105, 255, 405, 555, 705]  # X positions for lily pads
+    occupied_pads = [False] * len(lily_pads)
+    
+    player = Player(width/2, 548, 40, 3, frog_img)
+    
+    timer_duration = 90000  # 90 seconds
+    game_timer = Timer(timer_duration)
+    game_timer.start()
+    
+    base_car_speeds = [c.speed for c in cars]
+    base_log_speeds = [l.speed for l in logs]
+    
 def draw():
-    if play:
-        playScreen()
-        #instantiate cars
-        for Car in cars:
-            car.dispay()
-            car.move()
-            
-        # instantiate fly class every 3 seconds
-        if time%3000 == 0:
-            flies.append(Fly())
+    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, death_by_car_img, death_by_water_img, death_by_timer_img, death_cause, p1, p2, p3, start_screen, game_started, car, back_img, cars, heart, level, base_car_speeds, base_log_speeds
+    global player_dead, death_timer, saved_lives, game_over, game_over_image, logs, last_known_lives, game_timer, timer_duration, p1_respawn_timer, p2_respawn_timer, p3_respawn_timer, p1_respawn_delay, p2_respawn_delay, p3_respawn_delay
+    global lily_pads, occupied_pads, pixelFont, car_original_speeds, log_original_speeds, slowdown_active, slowdown_start_frame, slowdown_duration
     
-        # instantiate powerup class every 4 seconds
-        num = randInt(1,3)
-        if num == 1:
-            letter = "a"
-        elif num == 2:
-            letter = "b"
+    if not game_started:
+        background(0)
+        image(start_screen, 0, 0, width, height)
+        return
+
+    image(back_img, 0, 0, width, height) # Background
+    
+    if player != None:                  #Heart display logic
+        last_known_lives = player.lives
+    
+    for i in range(last_known_lives):
+        image(heart, 770 - i * 25, 560)
+
+    
+    # Check if the time has run out
+    if game_timer.done() and player is not None:
+        saved_lives = player.lives - 1
+        if saved_lives <= 0:
+            game_over = True
+            player = None
+            death_cause = "timer"
         else:
-            letter = "c"
-        if time%4000 == 0:
-            powups.append(Powerup(letter))
+            player_dead = True
+            death_timer = frameCount
+            player = None
+
+                 #Car moving and display
+    for c in cars:
+        c.move()
+        c.display()
+        if not player_dead and player is not None and c.check_collision(player):
+            saved_lives = player.lives - 1
+            if saved_lives <= 0:
+                game_over = True
+                player = None
+                death_cause = "car"
+            else:
+                player_dead = True
+                death_timer = frameCount
+                player = None
+            break
+
+
+    # Powerup p1 (extra life)
+    if p1 is not None and player is not None:
+        if p1.collides_with(player):
+            player.lives += 1
+            p1 = None
+            p1_respawn_timer = frameCount
+            p1_respawn_delay = int(random(450, 750))  # Random time interval (15-25 seconds)
+    
+    elif p1 is None and frameCount - p1_respawn_timer > p1_respawn_delay:
+        p1 = Powerup("c")
+
             
-        #add more players once current player has reached goal. End the game if all players are at goals
-        if currentFrog.y <= .1:
-            p2 = Player(width/2, height, 3,3,Frog_img)
-            if currentFrog == p1:
-                p2 = Player(width/2,height,3,3,Frog_img)
-                currentFrog = p2
-            elif currentFrog == p2:
-                p3 = Player(width/2,height,3,3,Frog_img)
-                currentFrog = p3
-            elif currentFrog == p3:
-                p4 = Player(width/2,height,3,3,Frog_img)
-                currentFrog = p4
-            elif currentFrog == p4:
-                p5 = Player(width/2,height,3,3,Frog_img)
-                currentFrog = p5
-            else:
-                won = true
-                play = not play
-                
-        #checks for lives deduction
-        # checks for collision with car
-        for car in cars:
-            if car.check_collision == True:
-                lives = lives - 1
-        #checks if frog fell in water
-        if currentFrog.y <= .5 * height and currentFrog.y >= .1 * height and log.checkCol(currentPlayer) == False:
-            lives = lives -1
+    # Powerup p2 (score)
+    if p2 is not None and player is not None:
+        if p2.collides_with(player):
+            score += 100
+            p2 = None
+            p2_respawn_timer = frameCount
+            p2_respawn_delay = int(random(450, 750))
+    
+    elif p2 is None and frameCount - p2_respawn_timer > p2_respawn_delay:
+        p2 = Powerup("b")
+    
+    # Powerup p3 (extra life)
+    if p3 is not None and player is not None:
+        if p3.collides_with(player):
+            
+            car_original_speeds = [c.speed for c in cars]
+            log_original_speeds = [l.speed for l in logs]
+    
+            for c in cars:
+                c.speed *= 0.5
+            
+            for l in logs:
+                l.speed *= 0.5
+    
+            slowdown_active = True
+            slowdown_start_frame = frameCount
+    
+            p3 = None
+            p3_respawn_timer = frameCount
+            p3_respawn_delay = int(random(450, 750))
+    
+    elif p3 is None and frameCount - p3_respawn_timer > p3_respawn_delay:
+        p3 = Powerup("a")
         
-        # checks for points by getting flies
-        for fly in flies:
-            if Player.collides_with(fly):
-                score = score + 50
-                #need code here to add more points if powerup type b is claimed. Waiting on timer for powerups
-                
-                
-        # adds claimed powerups to a class of active powerups        
-        for p in powups:
-            if play.collides_with(p):
-                activePowups.append(p)
-                #starts timer for powerup
-                expirationTime = time + 2000
-                expirations.append(experationTime)
-                
-                #checks if timer has ended
-        for t in expirations:
-             if t == expirationTime:
-                 expiringPowup = activePowups[expirations.index[t]]
-                 activePowups.remove(expiringPowup)                    
-                               
-          #loops through powerup effects                         
-        for p in activePowups:
-            expireTime = time + 2000        
-            if p(letter) == "a":
-                #method to execute powerup once katelyn adds it
-            elif p(letter) == "b":
-                #method to execute powerup once katelyn adds it
-            else:
-                #method to execute powerup once katelyn adds it
-              
-                #goes through screens for when game is over  
-    elif won:
-        wonScreen()   
-    elif dead:
-        deadScreen()
-    else:  
-        startScreen()
+    if slowdown_active and frameCount - slowdown_start_frame > slowdown_duration:
+        print("Slowdown expired: Restoring speeds...")
+        for i in range(len(cars)):
+            cars[i].speed = car_original_speeds[i]
+        for i in range(len(logs)):
+            logs[i].speed = log_original_speeds[i]
+        
+        slowdown_active = False
 
-# Optional: Add key press to toggle
+
+
+
+        #Fly collision detection and respawn logic
+
+    if fly_one is not None and player is not None:
+        if player.collides_with(fly_one):
+            score += 150
+            fly_one = None
+            fly_respawn_timer = frameCount
+            fly_respawn_delay = int(random(270, 330))
+
+    elif fly_one is None and frameCount - fly_respawn_timer > fly_respawn_delay:
+        fly_one = Fly()
+
+        
+        # Player respawn
+    if player_dead and frameCount - death_timer > 60:  # Wait 2 seconds (30 fps x 2)
+        player = Player(width/2, 548, 40, saved_lives, frog_img)
+        player_dead = False
+        game_timer = Timer(timer_duration)
+        game_timer.start()
+        
+    #Log display and move
+        
+    for log in logs:
+        log.move()
+        log.display()
+
+        
+        # Show the powerup(s) and fly
+    if p1 is not None:
+        p1.display()
+        
+    if p2 is not None:
+        p2.display()
+        
+    if p3 is not None:
+        p3.display()
+    
+    if fly_one is not None:
+        fly_one.move()
+           
+    if player is not None:
+        on_log = False
+        for log in logs:
+            if log.check_collision(player):
+                on_log = True
+                # Move the player with the log
+                if log.direction == "right":
+                    player.x += log.speed
+                else:
+                    player.x -= log.speed
+                break 
+ 
+        # If player is in water (not on a log) and in the water zone, die
+        if not on_log and 35 < player.y < 265: #35
+            saved_lives = player.lives - 1
+            if saved_lives <= 0:
+                game_over = True
+                player = None
+                death_cause = "water"
+            else:
+                player_dead = True
+                death_timer = frameCount
+                player = None
+    #Player snapping to lily pads
+    if player is not None and player.y <= 35:
+        closest_index = min(range(len(lily_pads)), key=lambda i: abs(player.x - lily_pads[i]))
+        snap_distance = abs(player.x - lily_pads[closest_index])
+        snap_radius = 40  # Radius within which a frog can land on a lily pad
+    
+        if snap_distance <= snap_radius and not occupied_pads[closest_index]:
+            # Successfully landed on a lily pad
+            player.x = lily_pads[closest_index]
+            player.y = 40
+            occupied_pads[closest_index] = True
+    
+            if all(occupied_pads):
+                level_up()
+                score += 100
+            else:
+                saved_lives = player.lives
+                player = Player(width / 2, 548, 40, saved_lives, frog_img)
+        else:
+            # Missed lily pad (i.e., landed on grass)
+            saved_lives = player.lives - 1 if player is not None else 0
+            if saved_lives <= 0:
+                game_over = True
+                player = None
+                death_cause = "water"
+            else:
+                player_dead = True
+                death_timer = frameCount
+                player = None
+
+                #Show the frog if the pad is occupied
+    for i in range(len(lily_pads)):
+        if occupied_pads[i]:
+            image(frog_img, lily_pads[i] - 22, 0, 65, 65)
+            
+
+        
+        
+    # Timer bar display
+    # Timer circle display
+    remaining_time = max(0, timer_duration - (millis() - game_timer.saved_time))
+    angle = map(remaining_time, 0, timer_duration, 0, TWO_PI)
+    
+    cx = width - 30  # x pos
+    cy = 26          # y pos
+    radius = 20      # size of the timer
+    
+    # Background circle
+    fill(34, 97, 0)
+    noStroke()
+    ellipse(cx, cy, radius * 2, radius * 2)
+    
+    # Remaining time (arc)
+    fill(68, 185, 4)
+    arc(cx, cy, radius * 2, radius * 2, -HALF_PI, -HALF_PI + angle, PIE)
+
+    if player is not None:
+        player.display()
+        
+        #Score and level text
+    fill(0)
+    textSize(8)
+    text("Score:" + str(score), 5, 20)
+    text("Level:" + str(level), 5, 38)
+    
+        #Display corresponding death image
+    if game_over:
+        if death_cause == "car":
+            image(death_by_car_img, 0, 0, width, height)
+        elif death_cause == "water":
+            image(death_by_water_img, 0, 0, width, height)
+        elif death_cause == "timer":
+            image(death_by_timer_img, 0, 0, width, height)
+        else:
+            image(game_over_image, 0, 0, width, height)  # fallback
+            
+        #Display the score on death    
+        fill(255)
+        textSize(32)
+        textAlign(CENTER, CENTER)
+        text(str(score), width/2+140, height/2-45)
+        return
+        
+def level_up():
+    global level, occupied_pads, player, cars, logs
+    level += 1
+    # reset the pads
+    for i in range(len(occupied_pads)):
+        occupied_pads[i] = False
+        
+    # reset the frog
+    saved_lives = player.lives if player is not None else 3
+    player = Player(width/2, 548, 40, saved_lives, frog_img)
+    
+    # rescale every vehicle
+    speed_multiplier = 1 + 0.2 * (level - 1)
+    for i, c in enumerate(cars):
+        c.speed = base_car_speeds[i] * speed_multiplier
+    for i, l in enumerate(logs):
+        l.speed = base_log_speeds[i] * speed_multiplier
+
 def keyPressed():
-    global play
-    play = not play
+    global keyPressedOnce, score
+    if not keyPressedOnce and player is not None:
+        player.move(keyCode)
+        score += 1
+        keyPressedOnce = True
 
-def playScreen():
-    background(255)
-    #street
-    fill(107, 103, 110)
-    rect(0, height * 0.8, width, height * 0.1)  # Adjust for screen size
-    rect(0, height * 0.6, width, height * 0.1)
 
-    # Water blue
-    fill(85, 153, 242)
-    rect(0, 0, width, height * 0.5)
-
-    # Grass green
-    fill(16, 125, 45)
-    rect(0, height * 0.9, width, height * 0.1)
-    rect(0, height * 0.7, width, height * 0.1)
-    rect(0, height * 0.5, width, height * 0.1)
-
-    # Safe goals level ended
-    rect(0, 0, width * 0.125, height * 0.1)
-    rect(width * 0.225, 0, width * 0.125, height * 0.1)
-    rect(width * 0.45, 0, width * 0.125, height * 0.1)
-    rect(width * 0.675, 0, width * 0.125, height * 0.1)
-    rect(width * 0.9, 0, width * 0.125, height * 0.1)
-
-    # Yellow dashes
-    fill(232, 229, 30)
-    dash_width = width * 0.075  # Set width of the dashes relative to canvas size
-    rect(0, height * 0.85, dash_width, 5)
-    for i in range(1, 7):
-        rect(i * width * 0.15, height * 0.85, dash_width, 5)
-
-    # Yellow dashes higher line
-    for i in range(7):
-        rect(i * width * 0.15, height * 0.65, dash_width, 5)
-        
-    # dashboard
-    rect(0,0, width * .2, height * .2)
-    text("Score" + str(score), width*.1, height *.05)
-    text("lives" +str(lives), width*.1, height * .1)
-    text("active powerups:", width*.1, height * .1)
-    # once timer is implemented add code to display active powerups
-#intro screen
-def startScreen():
-    background(120, 170, 255)
-    image(img, 250, 300, img.width*9, img.height*9)
-    fill(0)
-    text("Welcome to PowerHop", 400, 200)
-    text("Press any key to start", 400,250)
+def keyReleased():
+    global keyPressedOnce
+    keyPressedOnce = False
     
-#gameover screen if the player won
-def wonScreen():
-    global play
-    play = not play
-    background(255)
-    fill(0)
-    text("Game won!", 400,200)
-    text("score: " + str(score) + "remaining lives: " + str(lives), 400, 250)
-    text("Press any kjey to play again", 400, 300)
-    
-#game over screen if the player lost
-def deadScreen():
-    global play
-    play = not play
-    background(255)
-    fill(0)
-    text("Game lost!", 400,200)
-    text("score: " + str(score), 400, 250)
-    text("Press any key to play again", 400, 300)
+def mousePressed():
+    global game_started
+    if not game_started:
+        game_started = True
