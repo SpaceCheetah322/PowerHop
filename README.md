@@ -24,7 +24,7 @@ Click on the code icon in GitHub, download the whole repository as a zip file, a
 Everyone helped test the code along the way and make graphics!
 
 
-## GUI mockups (play screens created by Katelyn and Sofia, added by Ava. Logo by Ava. Car and Background by Sofia.)
+## GUI mockups (play screens created by Katelyn and Sofia, added by Ava. Logo by Ava. Background by Sofia.)
 ![Start screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Start.png?raw=true)
 ![Play Screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_Play.png?raw=true)
 ![End Screen](https://github.com/colterschiwal5/python_group/raw/Frogger-or-TicTacToe/Frogger/images/Frogger_End.png?raw=true)
