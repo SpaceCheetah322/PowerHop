@@ -2,12 +2,12 @@ class Player:
     def __init__(self, x, y, speed, lives, img):
         self.x = x
         self.y = y
-        self.speed = 40
+        self.speed = 46.1
         self.lives = lives
         self.img = img
         self.width = img.width
         self.height = img.height
-        self.score = 0
+        self.scale = 1  # Add this line
 
     def move(self, key_code):
         if key_code == LEFT or key == 'a':
@@ -18,84 +18,19 @@ class Player:
             self.y -= self.speed
         elif key_code == DOWN or key == 's':
             self.y += self.speed
-    
-        # Keep the player inside the screen
-        self.x = constrain(self.x, 0, width - self.width)
-        self.y = constrain(self.y, 0, height - self.height)
 
+        self.x = constrain(self.x, 0, width - (self.width - 12))
+        self.y = constrain(self.y, 0, height - (self.height - 12))
 
     def display(self):
         image(self.img, self.x, self.y)
-        
+
     def collides_with(self, other):
+        buffer_x = 10
+        buffer_y = 10
         return (
-            self.x < other.x + other.width and
-            self.x + self.width > other.x and
-            self.y < other.y + other.height and
-            self.y + self.height > other.y
+            self.x + buffer_x < other.x + other.width and
+            self.x + self.width - buffer_x > other.x and
+            self.y + buffer_y < other.y + other.height and
+            self.y + self.height - buffer_y > other.y
         )
-
-"""
-from Player import Player
-from Fly import Fly
-from Powerup import Powerup
-
-def setup():
-    global player, frog_img, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives
-    size(500, 500)
-    frameRate(30)
-    frog_img = loadImage("Frogger_Frog_Front_Two.gif")
-    fly_one = Fly()
-    player = Player(width/2-20, 436, 40, 3, frog_img)
-    print(fly_one.frame_1)
-    score = 0
-    fly_respawn_timer = 0
-    fly_respawn_delay = 0
-    lives = 3
-    
-    p1 = Powerup("a")
-    p2 = Powerup("b")
-    p3 = Powerup("c")
-    p1.display()
-    p2.display()
-    p3.display()
-
-
-def draw():
-    global player, fly_one, score, fly_respawn_timer, fly_respawn_delay, p1, p2, p3, lives
-    background(2, 33, 84)
-    fill(177, 24, 219)
-    noStroke()
-    rect(0, 420, 500, 80)
-    
-
-    p1.display()
-    p2.display()
-    p3.display()
-
-
-    if fly_one is not None:
-            fly_one.move()
-            if player.collides_with(fly_one):
-                score += 10
-                fly_one = None
-                fly_respawn_timer = frameCount  # record when it was destroyed
-                fly_respawn_delay = int(random(270, 330))  # random 9-11 seconds. Take into account 30fps for time calc
-
-    else:
-        # Check if enough time passed
-        if frameCount - fly_respawn_timer > fly_respawn_delay:
-            fly_one = Fly()  # Spawn new fly!
-
-    fill(0)
-    textSize(24)
-    text("Score: " + str(score), 10, 30)
-
-    player.display()
-
-
-def keyPressed():
-    player.move(keyCode)
-
-
-"""
