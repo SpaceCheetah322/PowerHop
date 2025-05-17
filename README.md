@@ -32,8 +32,6 @@ Everyone helped test the code along the way and make graphics!
 
 ## Other game graphics
 ![Car](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/Screenshot:car.png?raw=true)
-![Truck](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/Truck.png?raw=true)
-![log](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/log.png?raw=true)
 ![Frog Top View](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/frog/Frogger_Frog.gif?raw=true)
 ![Log](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Log.gif?raw=true)
 ![Lily Pad](https://github.com/SpaceCheetah322/PowerHop/blob/main/images/objects/Frogger_Lily.gif?raw=true)
