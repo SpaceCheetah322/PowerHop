@@ -1,7 +1,6 @@
 # Written by Katelyn
 # NOTE: GIF, movement and collision functional!
 
-# Imports
 import time
 import random
 from Timer import Timer
@@ -12,13 +11,13 @@ class Fly:
     def __init__(self): # Initialization
         # Variable Declaration
         self.frame_num = 0
-        self.x = random.randint(100, 400) # Spawn location! Temporary and can/will change!
-        self.y = random.randint(100, 400) # Spawn location! Temporary and can/will change!
+        self.x = random.randint(100, 400) 
+        self.y = random.randint(100, 400) 
         self.speed = 1
         self.height = 30 #For collision Detection
         self.width = 30 #For collision Detection
-        self.x_loc = random.randint(0, 500) # Target location! Replace 500 with game width!
-        self.y_loc = random.randint(0, 500) # Target location! Replace 500 with game height!
+        self.x_loc = random.randint(0, 500) 
+        self.y_loc = random.randint(0, 500) 
         self.waiting = False
         # Defining Images
         self.frame_1 = loadImage("Frogger_Fly_Frame1.gif")
@@ -62,11 +61,3 @@ class Fly:
                 self.fly_time.start()
                 self.waiting = True
         self.display()
-
-    def collision(self, player):
-        distance = dist(self.x, self.y, player.x, player.y)
-        if distance < 64:
-            player.score *= 2
-            return True
-        else:
-            return False
