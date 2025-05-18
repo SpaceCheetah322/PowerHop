@@ -7,7 +7,7 @@ An object-oriented program inspired by Frogger, with added powerups that give th
 ### Objective
 The player has to get 5 frogs to 5 landing spots one at a time, without losing all of their lives.
 They must avoid obstacles (vehicles, water) and rack up as many points possible by collecting flies, which float around the map,
-and/or diffferent powerups, which spawn randomly (both appear at random). The game ends when the user gets all the frogs to the goals or when all lives are depleted.
+and/or different powerups, which spawn randomly (both appear at random). When all of the landing spots are filled, the level is increased and the game gets progressively harder. The game ends when all lives are depleted.
 
 ### Controls
 WASD or Arrow Keys to move.
