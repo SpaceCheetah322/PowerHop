@@ -7,9 +7,9 @@ class Player:
         self.img = img
         self.width = img.width
         self.height = img.height
-        self.scale = 1  # Add this line
+        self.scale = 1
 
-    def move(self, key_code):
+    def move(self, key_code):   #Movement logic, works for arrow keys or wasd
         if key_code == LEFT or key == 'a':
             self.x -= self.speed
         elif key_code == RIGHT or key == 'd':
@@ -27,7 +27,7 @@ class Player:
 
     def collides_with(self, other):
         buffer_x = 10
-        buffer_y = 10
+        buffer_y = 10    #Simple bounding box collision detection with buffers for accuracy
         return (
             self.x + buffer_x < other.x + other.width and
             self.x + self.width - buffer_x > other.x and
