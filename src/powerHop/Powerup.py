@@ -3,7 +3,6 @@ import time
 import random
 
 class Powerup:
-    # Constructor
     def __init__(self, type):
         self.type = type
         self.x = random.randint(100, 700)
@@ -23,7 +22,7 @@ class Powerup:
         elif self.type == "c": 
             image(self.health_bonus, self.x, self.y)
 
-    def collides_with(self, other):
+    def collides_with(self, other): #Simple bounding box collision detection
         return (
             self.x < other.x + other.width and
             self.x + self.width > other.x and
