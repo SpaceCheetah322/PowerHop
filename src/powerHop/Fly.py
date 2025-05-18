@@ -1,15 +1,10 @@
 # Written by Katelyn
-# NOTE: GIF, movement and collision functional!
-
 import time
 import random
 from Timer import Timer
-
-# Class
+ 
 class Fly:
-    # Constructor
-    def __init__(self): # Initialization
-        # Variable Declaration
+    def __init__(self):
         self.frame_num = 0
         self.x = random.randint(100, 400) 
         self.y = random.randint(100, 400) 
