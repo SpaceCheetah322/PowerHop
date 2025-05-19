@@ -21,6 +21,7 @@ Click on the code icon in GitHub, download the whole repository as a zip file, a
 * Sofia - car and log class
 * Katelyn - fly and powerup class
 
+
 Everyone helped test the code along the way and make graphics!
 
 
